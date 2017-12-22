@@ -23,5 +23,5 @@ npm run dev
 ```
 3. Build all locally
 ```
-npm run clean && npm run build
+npm run build
 ```
