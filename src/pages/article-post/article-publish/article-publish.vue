@@ -54,7 +54,7 @@
                         <transition name="publish-time">
                             <div v-show="editPublishTime" class="publish-time-picker-con">
                                 <div class="margin-top-10">
-                                    <DatePicker @on-change="setPublishTime" type="datetime" style="width:200px;" placeholder="选择日期和时间" ></DatePicker>
+                                    <DatePicker :value="publishTime" @on-change="setPublishTime" type="datetime" style="width:200px;" placeholder="选择日期和时间" ></DatePicker>
                                 </div>
                                 <div class="margin-top-10">
                                     <Button type="primary" @click="handleSavePublishTime">确认</Button>
@@ -64,8 +64,12 @@
                         </transition>
                     </p>
                     <Row class="margin-top-20 publish-button-con">
-                        <span class="publish-button"><Button @click="handleSaveDraft">保存草稿</Button></span>
-                        <span class="publish-button"><Button @click="handlePublish" :loading="publishLoading" icon="ios-checkmark" style="width:90px;" type="primary">发布</Button></span>
+                        <span class="publish-button">
+                            <Button @click="handleSaveDraft" :loading="publishLoading">保存草稿</Button>
+                        </span>
+                        <span class="publish-button">
+                            <Button @click="handlePublish" :loading="publishLoading" icon="ios-checkmark" style="width:90px;" type="primary">发布</Button>
+                        </span>
                     </Row>
                 </Card>
             </Col>
@@ -74,12 +78,14 @@
 </template>
 
 <script>
-import { ajaxPost } from '@/libs/ajax';
+import { ajaxPost, ajaxGet, ajaxPatch } from '@/libs/ajax';
+import moment from 'moment';
 
 export default {
     name: 'artical-publish',
     data () {
         return {
+            mode: 'post',
             articleTitle: '',
             articleError: '',
             editOpenness: false,
@@ -158,37 +164,83 @@ export default {
             return true;
         },
         handleSaveDraft () {
-            if (!this.canPublish()) {
-                //
+            if (this.canPublish()) {
+                this.handleSaveArticle({
+                    is_draft: true
+                });
             }
         },
         handlePublish () {
             if (this.canPublish()) {
-                this.publishLoading = true;
-                const data = {
-                    title: this.articleTitle,
-                    content: this.content,
-                    is_open: this.currentOpenness === '公开',
-                    is_top: this.topArticle,
-                    publish_time_type: this.publishTimeType,
-                    publish_time: !!this.publishTime ? new Date(this.publishTime).getTime() : new Date().getTime(),
-                    created_time: new Date().getTime()
-                };
-                ajaxPost({
-                    url: 'article',
-                    params: data,
-                    success () {
-                        this.$Notice.success({
-                            title: '保存成功',
-                            desc: '新闻《' + this.articleTitle + '》保存成功'
-                        });
-                    },
-                    finally () {
-                        this.publishLoading = false;
-                    }
-                }, this);
+                this.handleSaveArticle({
+                    is_draft: false
+                });
             }
         },
+        handleSaveArticle (option) {
+            this.publishLoading = true;
+            const data = {
+                title: this.articleTitle,
+                content: this.content,
+                is_open: this.currentOpenness === '公开',
+                is_top: this.topArticle,
+                publish_time_type: this.publishTimeType,
+                publish_time: !!this.publishTime ?
+                    new Date(this.publishTime).getTime() : new Date().getTime(),
+                created_time: new Date().getTime()
+            };
+            data.is_draft = option.is_draft;
+            const ajaxData = {
+                url: 'article',
+                params: data,
+                success () {
+                    this.$Notice.success({
+                        title: '保存成功',
+                        desc: '新闻《' + this.articleTitle + '》保存成功'
+                    });
+                    if (this.mode === 'patch') {
+                        this.$router.push({
+                            name: 'article_list'
+                        });
+                    }
+                },
+                finally () {
+                    this.publishLoading = false;
+                }
+            };
+            if (this.mode === 'post') {
+                ajaxPost(ajaxData, this);
+            } else {
+                const { params } = this.$route;
+                delete data.created_time;
+                ajaxData.url = `article/${params.id}`;
+                ajaxPatch(ajaxData, this);
+            }
+        },
+        fetchArticle (id) {
+            ajaxGet({
+                url: `article/${id}`,
+                success (res) {
+                    if (JSON.stringify(res) !== '{}') {
+                        const { news } = res;
+                        this.articleTitle = news.title;
+                        this.content = news.content;
+                        this.currentOpenness = news.is_open ? '公开' : '私密';
+                        this.Openness = news.is_open ? '公开' : '私密';
+                        this.topArticle = news.is_top;
+                        this.publishTimeType = news.publish_time_type;
+                        this.publishTime = moment(+news.publish_time, 'x').format('YYYY-MM-DD HH:mm:ss');
+                    } else {
+                        this.$Message.error({
+                            content: '新闻不存在!'
+                        });
+                        this.$router.push({
+                            name: 'article_list'
+                        });
+                    }
+                }
+            }, this);
+        }
     },
     computed: {
         editor () {
@@ -196,6 +248,11 @@ export default {
         }
     },
     mounted () {
+        const { name, params } = this.$route;
+        if (name === 'article_edit') {
+            this.mode = 'patch';
+            this.fetchArticle(params.id);
+        }
     },
     destroyed () {
     }

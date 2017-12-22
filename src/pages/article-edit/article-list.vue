@@ -10,7 +10,7 @@
                 <Table border :loading="loading" :columns="columns" :data="data"></Table>
                 <div style="margin: 10px;overflow: hidden">
                     <div style="float: right;">
-                        <Page :total="total" :current="1" :page-size="5" @on-change="handleChangeList"></Page>
+                        <Page :total="total" :current.sync="current" :page-size="5" @on-change="handleChangeList"></Page>
                     </div>
                 </div>
             </Card>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ajaxGet } from '@/libs/ajax';
+import { ajaxGet, ajaxDelete } from '@/libs/ajax';
 import momoent from 'moment';
 
 export default {
@@ -27,6 +27,7 @@ export default {
     data () {
         return {
             total: 0,
+            current: 1,
             loading: false,
             columns: [
                 {
@@ -43,11 +44,11 @@ export default {
                     key: 'title'
                 },
                 {
-                    title: '是否发布',
+                    title: '是否公开',
                     key: 'is_open',
                     render: (h, params) => {
                         return h('span',
-                            !!params.row.is_open ? '已发布' : '');
+                            !!params.row.is_open ? '公开' : '私密');
                     }
                 },
                 {
@@ -56,6 +57,14 @@ export default {
                     render: (h, params) => {
                         return h('span',
                             !!params.row.is_top ? '置顶' : '');
+                    }
+                },
+                {
+                    title: '是否草稿',
+                    key: 'is_draft',
+                    render: (h, params) => {
+                        return h('span',
+                            !!params.row.is_draft ? '是' : '');
                     }
                 },
                 {
@@ -102,21 +111,34 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.show(params.index);
+                                        this.$router.push({
+                                            name: 'article_edit',
+                                            params: {
+                                                id: params.row.id
+                                            }
+                                        });
                                     }
                                 }
                             }, '编辑'),
-                            h('Button', {
+                            h('Poptip', {
                                 props: {
-                                    type: 'error',
-                                    size: 'small'
+                                    confirm: true,
+                                    title: '您确定要删除这条数据吗?',
+                                    transfer: true
                                 },
                                 on: {
-                                    click: () => {
-                                        this.remove(params.index);
+                                    'on-ok': () => {
+                                        this.deleteArticleById(params.row.id);
                                     }
                                 }
-                            }, '删除')
+                            }, [
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    }
+                                }, '删除')
+                            ])
                         ]);
                     }
                 }
@@ -135,7 +157,7 @@ export default {
             }, params);
             this.loading = true;
             ajaxGet({
-                url: 'article',
+                url: 'articles',
                 params: data,
                 success (res) {
                     this.data = res.news;
@@ -143,6 +165,20 @@ export default {
                 },
                 finally () {
                     this.loading = false;
+                }
+            }, this);
+        },
+        deleteArticleById (id) {
+            ajaxDelete({
+                url: `article/${id}`,
+                success () {
+                    this.$Message.success({
+                        content: '删除成功'
+                    });
+                    this.current = 1;
+                    this.fetchArticleList({
+                        page_at: 1
+                    });
                 }
             }, this);
         },

@@ -43,10 +43,19 @@ ajax.interceptors.response.use(
 const req = async (option, vm) => {
     try {
         let res = null;
-        if (option.method === 'get') {
-            res = await ajax.get(option.url, {params: option.params});
-        } else {
-            res = await ajax.post(option.url, option.params);
+        switch (option.method) {
+            case 'get' :
+                res = await ajax.get(option.url, {params: option.params});
+                break;
+            case 'post' :
+                res = await ajax.post(option.url, option.params);
+                break;
+            case 'patch' :
+                res = await ajax.patch(option.url, option.params);
+                break;
+            case 'delete' :
+                res = await ajax.delete(option.url, option.params);
+                break;
         }
         option.success.call(vm, res);
     } catch (e) {
@@ -64,16 +73,26 @@ const req = async (option, vm) => {
     }
 }
 
-const ajaxGet = (option, vm) => {
-    const op = Object.assign(option, {method: 'get'});
-    req(op, vm);
-}
-const ajaxPost = (option, vm) => {
-    const op = Object.assign(option, {method: 'post'});
-    req(op, vm);
-}
+const methods = ['Get', 'Post', 'Patch', 'Delete'];
+
+const ajaxMethods = {};
+methods.forEach(method => {
+    ajaxMethods[`ajax${method}`] = (option, vm) => {
+        const op = Object.assign(option,
+            {method: method.toLowerCase()});
+        req(op, vm);
+    }
+});
+
+const ajaxGet = ajaxMethods.ajaxGet;
+const ajaxPost = ajaxMethods.ajaxPost;
+const ajaxPatch = ajaxMethods.ajaxPatch;
+const ajaxDelete = ajaxMethods.ajaxDelete;
+
 export {
     ajax,
     ajaxGet,
-    ajaxPost
+    ajaxPost,
+    ajaxPatch,
+    ajaxDelete,
 };

@@ -65,8 +65,8 @@ export const appRouter = [
         title: '新闻',
         component: Main,
         children: [
-            { path: 'publish', title: '发布新闻', name: 'publish', icon: 'compose', component: resolve => { require(['@/pages/article-post/article-publish/article-publish.vue'], resolve); } },
-            { path: 'list', title: '新闻列表', name: 'list', icon: 'compose', component: resolve => { require(['@/pages/article-edit/article-list.vue'], resolve); } },
+            { path: 'publish', title: '发布新闻', name: 'article_publish', icon: 'compose', component: resolve => { require(['@/pages/article-post/article-publish/article-publish.vue'], resolve); } },
+            { path: 'list', title: '新闻列表', name: 'article_list', icon: 'compose', component: resolve => { require(['@/pages/article-edit/article-list.vue'], resolve); } },
         ]
     }
 ];

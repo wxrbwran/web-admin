@@ -7,8 +7,14 @@ router.get('/', ApiController.index);
 
 router.get('/test/:id', ApiController.test);
 
-router.get('/article', ApiController.getArticle);
+router.get('/articles', ApiController.getArticles);
+
+router.get('/article/:id', ApiController.getArticleById);
 
 router.post('/article', ApiController.addArticle);
+
+router.patch('/article/:id', ApiController.editArticleById);
+
+router.delete('/article/:id', ApiController.deleteArticleById);
 
 module.exports = router;
