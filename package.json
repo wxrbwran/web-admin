@@ -1,6 +1,6 @@
 {
-  "name": "iview-admin",
-  "version": "1.2.3",
+  "name": "yx-Admin",
+  "version": "1.0.0",
   "description": "a management bases on iview",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,7 @@
     "server-start": "node ./server/bin/www",
     "server-dev": "nodemon ./server/bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iview/iview-admin.git"
-  },
-  "author": "Lison<zhigang.li@tendcloud.com>",
+  "author": "wxr",
   "license": "MIT",
   "dependencies": {
     "area-data": "^1.0.0",
