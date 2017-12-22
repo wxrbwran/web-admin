@@ -11,43 +11,6 @@ util.title = function (title) {
     window.document.title = title;
 };
 
-const ajaxUrl = env === 'development'
-    ? 'http://127.0.0.1:3000'
-    : env === 'production'
-        ? 'https://www.url.com'
-        : 'https://debug.url.com';
-
-const nameSpace = '/api/v0/';
-
-util.ajax = axios.create({
-    baseURL: ajaxUrl + nameSpace,
-    timeout: 10000
-});
-util.ajax.interceptors.response.use(
-    response => {
-        if (!response.data) {
-            return Promise.reject('请求失败');
-        }
-        const { status } = response.data;
-        if (status === 'fail') {
-            const { data } = response.data;
-            const msg = data.message || '请求失败';
-            return Promise.reject(msg);
-        }
-        return response.data.data;
-    },
-    error => {
-        if (error.message &&
-            error.message.indexOf('timeout') !== -1) {
-            return Promise.reject('请求超时');
-        } else
-        if (error.message &&
-            error.message.indexOf('Network Error') !== -1) {
-            return Promise.reject('网络异常');
-        }
-        return Promise.reject('服务异常');
-    },
-)
 util.inOf = function (arr, targetArr) {
     let res = true;
     arr.map(item => {
@@ -281,13 +244,10 @@ util.checkUpdate = function (vm) {
     axios.get('https://api.github.com/repos/iview/iview-admin/releases/latest').then(res => {
         let version = res.data.tag_name;
         vm.$Notice.config({
-            duration: 0
+            duration: 4.5
         });
         if (semver.lt(packjson.version, version)) {
-            vm.$Notice.info({
-                title: 'iview-admin更新啦',
-                desc: '<p>iView-admin更新到了' + version + '了，去看看有哪些变化吧</p><a style="font-size:13px;" href="https://github.com/iview/iview-admin/releases" target="_blank">前往github查看</a>'
-            });
+            console.log(`iView-admin更新到${version}了，去看看有哪些变化吧`);
         }
     });
 };

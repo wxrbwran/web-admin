@@ -52,20 +52,21 @@ export const otherRouter = {
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/pages/home/home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/pages/own-space/own-space.vue'], resolve); } },
+        { path: 'article_edit/:id', title: '编辑新闻', name: 'article_edit', icon: 'compose', component: resolve => { require(['@/pages/article-post/article-publish/article-publish.vue'], resolve); } },
     ]
 };
 
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
     {
-        path: '/form',
+        path: '/article',
         icon: 'android-checkbox',
         name: 'form',
-        title: '文章',
+        title: '新闻',
         component: Main,
         children: [
-            { path: 'artical-publish', title: '文章发布', name: 'artical-publish', icon: 'compose', component: resolve => { require(['@/pages/post-article/article-publish/article-publish.vue'], resolve); } },
-            { path: 'artical-edit', title: '文章编辑', name: 'artical-edit', icon: 'compose', component: resolve => { require(['@/pages/edit-article/article-table.vue'], resolve); } },
+            { path: 'publish', title: '发布新闻', name: 'publish', icon: 'compose', component: resolve => { require(['@/pages/article-post/article-publish/article-publish.vue'], resolve); } },
+            { path: 'list', title: '新闻列表', name: 'list', icon: 'compose', component: resolve => { require(['@/pages/article-edit/article-list.vue'], resolve); } },
         ]
     }
 ];

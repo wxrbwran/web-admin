@@ -7,6 +7,8 @@ router.get('/', ApiController.index);
 
 router.get('/test/:id', ApiController.test);
 
+router.get('/article', ApiController.getArticle);
+
 router.post('/article', ApiController.addArticle);
 
 module.exports = router;

@@ -74,9 +74,7 @@
 </template>
 
 <script>
-import util from '@/libs/util';
-const { ajax } = util;
-console.log(ajax);
+import { ajaxPost } from '@/libs/ajax';
 
 export default {
     name: 'artical-publish',
@@ -92,8 +90,6 @@ export default {
             publishTimeType: 'immediately',
             editPublishTime: false, // 是否正在编辑发布时间
             publishLoading: false,
-            addingNewTag: false, // 添加新标签
-            newTagName: '', // 新建标签名
             content: null,
             editorOption: {
                 theme: 'snow',
@@ -166,7 +162,7 @@ export default {
                 //
             }
         },
-        async handlePublish () {
+        handlePublish () {
             if (this.canPublish()) {
                 this.publishLoading = true;
                 const data = {
@@ -175,29 +171,24 @@ export default {
                     is_open: this.currentOpenness === '公开',
                     is_top: this.topArticle,
                     publish_time_type: this.publishTimeType,
-                    publish_time: !!this.publishTime ?
-                        new Date(this.publishTime).getTime() : new Date().getTime(),
-                    created_time: new Date().getTime(),
+                    publish_time: !!this.publishTime ? new Date(this.publishTime).getTime() : new Date().getTime(),
+                    created_time: new Date().getTime()
                 };
-                console.log(data);
-                try {
-                    const res = await ajax.post('article', data);
-                    console.log(res);
-                    this.$Notice.success({
-                        title: '保存成功',
-                        desc: '文章《' + this.articleTitle + '》保存成功',
-                        duration: 4
-                    });
-                } catch (e) {
-                    console.log(e);
-                } finally {
-                    this.publishLoading = false;
-                }
+                ajaxPost({
+                    url: 'article',
+                    params: data,
+                    success () {
+                        this.$Notice.success({
+                            title: '保存成功',
+                            desc: '新闻《' + this.articleTitle + '》保存成功'
+                        });
+                    },
+                    finally () {
+                        this.publishLoading = false;
+                    }
+                }, this);
             }
         },
-        handleSelectTag () {
-            localStorage.tagsList = JSON.stringify(this.articleTagSelected); // 本地存储文章标签列表
-        }
     },
     computed: {
         editor () {
