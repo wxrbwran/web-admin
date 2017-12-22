@@ -13,7 +13,9 @@ brew install node
 1.
 - install dependencies
 ```
-npm i
+npm i cnpm -g
+cnpm i pm2 -g
+cnpm i
 ```
 2. Start monitoring file changes & developing
 ```
