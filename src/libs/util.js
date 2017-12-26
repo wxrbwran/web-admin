@@ -7,7 +7,7 @@ let util = {
 
 };
 util.title = function (title) {
-    title = title || '心之力Admin';
+    title = title || '翼心Admin';
     window.document.title = title;
 };
 

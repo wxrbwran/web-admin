@@ -16,7 +16,7 @@ module.exports = {
         'vender-exten': '@/vendors/vendors.exten.js'
     },
     output: {
-        path: path.resolve(__dirname, '../dist/dist')
+        path: path.resolve(__dirname, '../server/public/dist')
     },
     module: {
         rules: [
@@ -74,8 +74,18 @@ module.exports = {
                 }),
             },
             {
-                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                test: /\.(gif|jpg|png)\??.*$/,
                 loader: 'url-loader?limit=1024'
+            },
+            {
+                test: /\.(woff|svg|eot|ttf)\??.*$/,
+                use: {
+                    loader: 'url-loader?limit=1024',
+                    options: {
+                        limit: 1024,
+                        // name: '../fonts/[name].[hash:8].[ext]'
+                    },
+                },
             },
             {
                 test: /\.(html|tpl)$/,

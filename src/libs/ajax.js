@@ -4,14 +4,14 @@ import axios from 'axios/index';
 const ajaxUrl = env === 'development'
     ? 'http://127.0.0.1:3000'
     : env === 'production'
-        ? 'https://www.url.com'
-        : 'https://debug.url.com';
+        ? 'http://localhost:8888'
+        : 'http://localhost:8888';
 
 const nameSpace = '/api/v0/';
 
 const ajax = axios.create({
     baseURL: ajaxUrl + nameSpace,
-    timeout: 10000
+    timeout: 5000
 });
 
 let $vm = null;

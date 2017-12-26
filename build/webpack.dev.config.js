@@ -30,22 +30,17 @@ module.exports = merge(webpackBaseConfig, {
             minChunks: Infinity
         }),
         new HtmlWebpackPlugin({
-            title: 'iView admin v' + package.version,
+            title: '翼心Admin v' + package.version,
             filename: '../index.html',
             template: './src/template/index.ejs',
             inject: false
         }),
         new CopyWebpackPlugin([
             {
-                from: 'src/views/main-components/theme-switch/theme'
+                from: 'src/pages/main-components/theme-switch/theme'
             },
-            {
-                from: 'src/views/my-components/text-editor/tinymce'
-            }
         ], {
-            ignore: [
-                'text-editor.vue'
-            ]
+            ignore: []
         }),
         new webpack.HotModuleReplacementPlugin(),
     ],

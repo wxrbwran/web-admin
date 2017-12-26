@@ -18,13 +18,13 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: 'https://iview.github.io/iview-admin/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名 
+        publicPath: '/dist/',  // 修改 https://iv...admin 这部分为你的服务器域名
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
     plugins: [
         new cleanWebpackPlugin(['dist/*'], {
-            root: path.resolve(__dirname, '../')
+            root: path.resolve(__dirname, '../server/public')
         }),
         new ExtractTextPlugin({
             filename: '[name].[hash].css',
@@ -60,22 +60,13 @@ module.exports = merge(webpackBaseConfig, {
                 from: 'td_icon.ico'
             },
             {
-                from: 'src/styles/fonts',
-                to: 'fonts'
-            },
-            {
-                from: 'src/views/main-components/theme-switch/theme'
-            },
-            {
-                from: 'src/views/my-components/text-editor/tinymce'
+                from: 'src/pages/main-components/theme-switch/theme'
             }
         ], {
-            ignore: [
-                'text-editor.vue'
-            ]
+            ignore: []
         }),
         new HtmlWebpackPlugin({
-            title: 'iView admin v' + package.version,
+            title: '翼心Admin v' + package.version,
             favicon: './td_icon.ico',
             filename: '../index.html',
             template: './src/template/index.ejs',

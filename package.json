@@ -7,7 +7,7 @@
     "init": "webpack --progress --config build/webpack.dev.config.js",
     "client-dev": "webpack-dev-server --open --config build/webpack.dev.config.js",
     "client-build": "webpack --progress --hide-modules --config build/webpack.prod.config.js",
-    "server-dev": "nodemon ./server/bin/www",
+    "server-dev": "PORT=3000 nodemon ./server/bin/www",
     "server-build": "pm2 start ./server/bin/www",
     "dev": "concurrently 'npm run server-dev' 'npm run client-dev'",
     "build": "npm run client-build && npm run server-build"
@@ -28,6 +28,7 @@
     "iview-area": "^1.5.12",
     "js-cookie": "^2.2.0",
     "knex": "^0.14.2",
+    "koa-compress": "^2.0.0",
     "koa2-cors": "^2.0.5",
     "node-sass": "^4.7.2",
     "nodemon": "^1.8.1",
