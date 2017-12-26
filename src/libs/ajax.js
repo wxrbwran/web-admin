@@ -14,6 +14,8 @@ const ajax = axios.create({
     timeout: 10000
 });
 
+let $vm = null;
+
 ajax.interceptors.response.use(
     response => {
         if (!response.data) {
@@ -28,19 +30,28 @@ ajax.interceptors.response.use(
         return response.data.data;
     },
     error => {
-        if (error.message &&
-            error.message.indexOf('timeout') !== -1) {
-            return Promise.reject('请求超时');
-        } else
-        if (error.message &&
-            error.message.indexOf('Network Error') !== -1) {
-            return Promise.reject('网络异常');
+        const { message } = error;
+        if (!!message) {
+            if (message.indexOf('timeout') !== -1) {
+                return Promise.reject('请求超时');
+            } else if (message.indexOf('Network Error') !== -1) {
+                return Promise.reject('网络异常');
+            } else if ($vm && message.indexOf('403') !== -1) {
+                $vm.$router.push({
+                    name: 'error-403'
+                });
+            } else if ($vm && message.indexOf('500') !== -1) {
+                $vm.$router.push({
+                    name: 'error-500'
+                });
+            }
         }
         return Promise.reject('服务异常');
     },
 );
 
 const req = async (option, vm) => {
+    $vm = vm;
     try {
         let res = null;
         switch (option.method) {
@@ -59,6 +70,7 @@ const req = async (option, vm) => {
         }
         option.success.call(vm, res);
     } catch (e) {
+        console.log(e);
         if (option.fail) {
             option.fail.call(vm, e);
         } else {

@@ -11,6 +11,7 @@ const knex = require('knex')({
 });
 
 const bs = require('bookshelf')(knex);
+
 const News = bs.Model.extend({
     tableName: 'news'
 });

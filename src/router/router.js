@@ -52,8 +52,8 @@ export const otherRouter = {
     children: [
         { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/pages/home/home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/pages/own-space/own-space.vue'], resolve); } },
-        { path: 'article_edit/:id', title: '编辑新闻', name: 'article_edit', component: resolve => { require(['@/pages/article/article-publish.vue'], resolve); } },
-        { path: 'interview_edit/:id', title: '编辑招聘信息', name: 'interview_edit', component: resolve => { require(['@/pages/article/article-publish.vue'], resolve); } },
+        { path: 'article_edit/:id', title: '编辑新闻', name: 'article_edit', component: resolve => { require(['@/pages/article/article-edit.vue'], resolve); } },
+        { path: 'position_edit/:id', title: '编辑招聘信息', name: 'position_edit', component: resolve => { require(['@/pages/position/position-edit.vue'], resolve); } }
     ]
 };
 
@@ -67,18 +67,18 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'publish', title: '发布新闻', name: 'article_publish', icon: 'compose', component: resolve => { require(['@/pages/article/article-publish.vue'], resolve); } },
-            { path: 'list', title: '新闻列表', name: 'article_list', icon: 'compose', component: resolve => { require(['@/pages/article/article-list.vue'], resolve); } }
+            { path: 'list', title: '新闻列表', name: 'article_list', icon: 'ios-list-outline', component: resolve => { require(['@/pages/article/article-list.vue'], resolve); } }
         ]
     },
     {
-        path: '/interview',
+        path: '/position',
         icon: 'android-checkbox',
-        name: 'interview',
+        name: 'position',
         title: '招聘',
         component: Main,
         children: [
-            { path: 'publish', title: '发布职位', name: 'interview_publish', icon: 'compose', component: resolve => { require(['@/pages/interview/interview-publish.vue'], resolve); } },
-            { path: 'list', title: '职位列表', name: 'interview_list', icon: 'compose', component: resolve => { require(['@/pages/interview/interview-list.vue'], resolve); } }
+            { path: 'publish', title: '发布职位', name: 'position_publish', icon: 'compose', component: resolve => { require(['@/pages/position/position-publish.vue'], resolve); } },
+            { path: 'list', title: '职位列表', name: 'position_list', icon: 'ios-list-outline', component: resolve => { require(['@/pages/position/position-list.vue'], resolve); } }
         ]
     }
 ];

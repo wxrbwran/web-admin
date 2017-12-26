@@ -18,7 +18,7 @@ import { ajaxGet, ajaxDelete } from '@/libs/ajax';
 import momoent from 'moment';
 
 export default {
-    name: 'editable-table',
+    name: 'article-list',
     data () {
         return {
             total: 0,
@@ -74,20 +74,10 @@ export default {
                 {
                     title: '发布时间',
                     key: 'publish_time',
-                    render: (h, params) => {
-                        return h('span',
-                            momoent(params.row.publish_time, 'x')
-                                .format('YYYY/MM/DD HH:mm:ss'));
-                    }
                 },
                 {
                     title: '创建时间',
                     key: 'created_time',
-                    render: (h, params) => {
-                        return h('span',
-                            momoent(params.row.created_time, 'x')
-                                .format('YYYY/MM/DD'));
-                    }
                 },
                 {
                     title: '操作',
@@ -152,7 +142,7 @@ export default {
             }, params);
             this.loading = true;
             ajaxGet({
-                url: 'articles',
+                url: 'all_articles',
                 params: data,
                 success (res) {
                     this.data = res.news;

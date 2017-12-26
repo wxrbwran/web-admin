@@ -1,20 +1,34 @@
 const router = require('koa-router')();
-const ApiController = require('../controller/api');
+const newsController = require('../controller/news');
+const positionController = require('../controller/position');
 
 router.prefix('/api/v0');
 
-router.get('/', ApiController.index);
+/* 新闻 */
 
-router.get('/test/:id', ApiController.test);
+router.get('/all_articles', newsController.getAllArticles);
 
-router.get('/articles', ApiController.getArticles);
+router.get('/post_articles', newsController.getPostArticles);
 
-router.get('/article/:id', ApiController.getArticleById);
+router.get('/article/:id', newsController.getArticleById);
 
-router.post('/article', ApiController.addArticle);
+router.post('/article', newsController.addArticle);
 
-router.patch('/article/:id', ApiController.editArticleById);
+router.patch('/article/:id', newsController.editArticleById);
 
-router.delete('/article/:id', ApiController.deleteArticleById);
+router.delete('/article/:id', newsController.deleteArticleById);
+
+/* 招聘 */
+router.get('/all_positions', positionController.getAllPositions);
+
+router.get('/post_positions', positionController.getPostPositions);
+
+router.get('/position/:id', positionController.getPositionById);
+
+router.post('/position', positionController.addPosition);
+
+router.patch('/position/:id', positionController.editPositionById);
+
+router.delete('/position/:id', positionController.deletePositionById);
 
 module.exports = router;

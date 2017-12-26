@@ -18,7 +18,7 @@ import { ajaxGet, ajaxDelete } from '@/libs/ajax';
 import momoent from 'moment';
 
 export default {
-    name: 'editable-table',
+    name: 'position-list',
     data () {
         return {
             total: 0,
@@ -35,8 +35,24 @@ export default {
                     }
                 },
                 {
-                    title: '新闻标题',
-                    key: 'title'
+                    title: '职位',
+                    key: 'position'
+                },
+                {
+                    title: '职位类型',
+                    key: 'job_type',
+                    render: (h, params) => {
+                        return h('span',
+                            !!params.row.job_type ? '全职' : '兼职');
+                    }
+                },
+                {
+                    title: '工作经验',
+                    key: 'experience'
+                },
+                {
+                    title: '工作地点',
+                    key: 'location'
                 },
                 {
                     title: '是否公开',
@@ -44,14 +60,6 @@ export default {
                     render: (h, params) => {
                         return h('span',
                             !!params.row.is_open ? '公开' : '私密');
-                    }
-                },
-                {
-                    title: '是否置顶',
-                    key: 'is_top',
-                    render: (h, params) => {
-                        return h('span',
-                            !!params.row.is_top ? '置顶' : '');
                     }
                 },
                 {
@@ -63,31 +71,8 @@ export default {
                     }
                 },
                 {
-                    title: '发布方式',
-                    key: 'publish_time_type',
-                    render: (h, params) => {
-                        return h('span',
-                            params.row.publish_time_type === 'immediately' ?
-                                '立即发布' : '定时发布');
-                    }
-                },
-                {
-                    title: '发布时间',
-                    key: 'publish_time',
-                    render: (h, params) => {
-                        return h('span',
-                            momoent(params.row.publish_time, 'x')
-                                .format('YYYY/MM/DD HH:mm:ss'));
-                    }
-                },
-                {
                     title: '创建时间',
-                    key: 'created_time',
-                    render: (h, params) => {
-                        return h('span',
-                            momoent(params.row.created_time, 'x')
-                                .format('YYYY/MM/DD'));
-                    }
+                    key: 'created_time'
                 },
                 {
                     title: '操作',
@@ -107,7 +92,7 @@ export default {
                                 on: {
                                     click: () => {
                                         this.$router.push({
-                                            name: 'article_edit',
+                                            name: 'position_edit',
                                             params: {
                                                 id: params.row.id
                                             }
@@ -123,7 +108,7 @@ export default {
                                 },
                                 on: {
                                     'on-ok': () => {
-                                        this.deleteArticleById(params.row.id);
+                                        this.deletePositionById(params.row.id);
                                     }
                                 }
                             }, [
@@ -142,20 +127,20 @@ export default {
         };
     },
     mounted () {
-        this.fetchArticleList({});
+        this.fetchPositionList({});
     },
     methods: {
-        fetchArticleList (params) {
+        fetchPositionList (params) {
             const data = Object.assign({}, {
                 page_at: 1,
                 page_size: 5
             }, params);
             this.loading = true;
             ajaxGet({
-                url: 'articles',
+                url: 'all_positions',
                 params: data,
                 success (res) {
-                    this.data = res.news;
+                    this.data = res.positions;
                     this.total = res.total;
                 },
                 finally () {
@@ -163,22 +148,22 @@ export default {
                 }
             }, this);
         },
-        deleteArticleById (id) {
+        deletePositionById (id) {
             ajaxDelete({
-                url: `article/${id}`,
+                url: `position/${id}`,
                 success () {
                     this.$Message.success({
                         content: '删除成功'
                     });
                     this.current = 1;
-                    this.fetchArticleList({
+                    this.fetchPositionList({
                         page_at: 1
                     });
                 }
             }, this);
         },
         handleChangeList (pageAt) {
-            this.fetchArticleList({
+            this.fetchPositionList({
                 page_at: pageAt
             });
         }
