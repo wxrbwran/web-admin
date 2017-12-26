@@ -26,10 +26,10 @@
                     is_open: this.Openness === '公开',
                     is_draft: option.is_draft,
                     publish_time: new Date(),
-                    created_time: new Date()
                 };
+                const { params } = this.$route;
                 const ajaxData = {
-                    url: 'position',
+                    url: `position/${params.id}`,
                     params: data,
                     success () {
                         this.$Notice.success({
@@ -44,9 +44,6 @@
                         this.publishLoading = false;
                     }
                 };
-                const { params } = this.$route;
-                delete data.created_time;
-                ajaxData.url = `position/${params.id}`;
                 ajaxPatch(ajaxData, this);
             },
             fillPositionList (list) {

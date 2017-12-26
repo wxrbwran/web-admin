@@ -62,7 +62,7 @@ const mixin = {
         },
         handleAddProfessionalism () {
             this.professionalismIndex++;
-            this.professionalisms.push({
+            this.professionalism.push({
                 value: '',
                 index: this.professionalismIndex,
                 status: 1

@@ -5,7 +5,7 @@
 
 <script>
     import moment from 'moment';
-    import { ajaxPost, ajaxGet, ajaxPatch } from '@/libs/ajax';
+    import { ajaxGet, ajaxPatch } from '@/libs/ajax';
     import mixin from './mixin/article';
     import template from './mixin/article-template';
 
@@ -23,12 +23,12 @@
                     is_top: this.topArticle,
                     publish_time_type: this.publishTimeType,
                     publish_time: !!this.publishTime ?
-                        new Date(this.publishTime) : new Date(),
-                    created_time: new Date()
+                        new Date(this.publishTime) : new Date()
                 };
                 data.is_draft = option.is_draft;
+                const { params } = this.$route;
                 const ajaxData = {
-                    url: 'article',
+                    url: `article/${params.id}`,
                     params: data,
                     success () {
                         this.$Notice.success({
@@ -43,9 +43,6 @@
                         this.publishLoading = false;
                     }
                 };
-                const { params } = this.$route;
-                delete data.created_time;
-                ajaxData.url = `article/${params.id}`;
                 ajaxPatch(ajaxData, this);
             },
             fetchArticle (id) {
