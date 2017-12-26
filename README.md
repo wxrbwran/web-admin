@@ -9,19 +9,22 @@
 brew install node
 ```
 
-## Development
-1.
-- install dependencies
+2. install dependencies
 ```
 npm i cnpm -g
 cnpm i pm2 -g
 cnpm i
 ```
-2. Start monitoring file changes & developing
+
+## Development
+1. Start monitoring file changes & developing
 ```
 npm run dev
 ```
-3. Build all locally
+
+## Production
+1. Build all locally
 ```
 npm run build
 ```
+2. open 'http://localhost:8888'

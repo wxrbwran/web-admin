@@ -13,7 +13,6 @@
     "build": "npm run client-build && npm run server-build"
   },
   "author": "wxr",
-  "license": "MIT",
   "dependencies": {
     "area-data": "^1.0.0",
     "axios": "^0.17.1",
