@@ -9,6 +9,29 @@ export default `
                     <FormItem label="简介">
                         <Input v-model="description"/>
                     </FormItem>
+                    <FormItem label="封面图">
+                        <Card class="news-cover">
+                            <Upload
+                                ref="upload"
+                                :show-upload-list="false"
+                                :format="['jpg','jpeg','png']"
+                                :max-size="2048"
+                                :on-exceeded-size="handleMaxSize"
+                                :on-format-error="handleFormatError"
+                                :on-success="handleSuccess"
+                                type="drag"
+                                name="cover"
+                                :action="action"
+                                style="display: inline-block;width:58px;">
+                                <div style="width: 58px;height:58px;line-height: 58px;">
+                                    <Icon type="camera" size="20"></Icon>
+                                </div>
+                            </Upload>
+                            <template v-if="cover">
+                                <img :src="cover_url">
+                            </template>
+                        </Card>
+                    </FormItem>
                 </Form>
                 <div class="editor margin-top-10">
                     <quill-editor ref="myTextEditor"
@@ -21,6 +44,15 @@ export default `
         </Col>
         <Col span="6" class="padding-left-10">
             <Card>
+                <p slot="title">
+                    <Icon type="paper-airplane"></Icon>
+                    新闻类型
+                </p>
+                <Select v-model="currentNewsType">
+                    <Option v-for="item in newsType" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+            </Card>
+            <Card class="margin-top-10">
                 <p slot="title">
                     <Icon type="paper-airplane"></Icon>
                     发布

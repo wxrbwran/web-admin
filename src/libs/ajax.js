@@ -107,4 +107,5 @@ export {
     ajaxPost,
     ajaxPatch,
     ajaxDelete,
+    ajaxUrl
 };

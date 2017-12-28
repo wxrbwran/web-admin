@@ -5,7 +5,7 @@
 
 <script>
     import moment from 'moment';
-    import { ajaxGet, ajaxPatch } from '@/libs/ajax';
+    import { ajaxGet, ajaxPatch, ajaxUrl } from '@/libs/ajax';
     import mixin from './mixin/article';
     import template from './mixin/article-template';
 
@@ -19,6 +19,8 @@
                     title: this.articleTitle,
                     description: this.description,
                     content: this.content,
+                    news_type: this.currentNewsType,
+                    cover: this.cover,
                     is_open: this.currentOpenness === '公开',
                     is_top: this.topArticle,
                     publish_time_type: this.publishTimeType,
@@ -54,6 +56,9 @@
                             this.articleTitle = news.title;
                             this.description = news.description;
                             this.content = news.content;
+                            this.currentNewsType = news.news_type;
+                            this.cover = news.cover;
+                            this.cover_url = `${ajaxUrl}/${news.cover}`;
                             this.currentOpenness = news.is_open ? '公开' : '私密';
                             this.Openness = news.is_open ? '公开' : '私密';
                             this.topArticle = news.is_top;

@@ -1,8 +1,28 @@
+import { ajaxUrl } from '../../../libs/ajax';
+
 const mixin = {
     data () {
         return {
             articleTitle: '',
             description: '',
+            content: null,
+            cover: '',
+            cover_url: null,
+            newsType: [
+                {
+                    value: 'latest',
+                    label: '最新动态'
+                },
+                {
+                    value: 'media',
+                    label: '媒体报道'
+                },
+                {
+                    value: 'culture',
+                    label: '业内文化'
+                }
+            ],
+            currentNewsType: 'latest',
             editOpenness: false,
             Openness: '公开',
             currentOpenness: '公开',
@@ -11,7 +31,6 @@ const mixin = {
             publishTimeType: 'immediately',
             editPublishTime: false, // 是否正在编辑发布时间
             publishLoading: false,
-            content: null,
             editorOption: {
                 theme: 'snow',
                 placeholder: '输入文章内容',
@@ -32,6 +51,11 @@ const mixin = {
             }
         };
     },
+    computed: {
+        action () {
+            return `${ajaxUrl}/upload/img/`;
+        }
+    },
     methods: {
         handleArticletitleBlur () {
             if (this.articleTitle.length !== 0) {
@@ -39,6 +63,23 @@ const mixin = {
             } else {
                 this.$Message.error('文章标题不可为空哦');
             }
+        },
+        handleSuccess (res) {
+            const { url } = res.data;
+            this.cover = url;
+            this.cover_url = `${ajaxUrl}/${url}`;
+        },
+        handleFormatError (file) {
+            this.$Notice.warning({
+                title: '错误的文件格式!',
+                desc: '请上传png、jpg、jpeg格式的文件'
+            });
+        },
+        handleMaxSize (file) {
+            this.$Notice.warning({
+                title: '文件过大！',
+                desc: '文件大小请限制在2M大小内'
+            });
         },
         handleEditOpenness () {
             this.editOpenness = !this.editOpenness;

@@ -39,6 +39,15 @@ export default {
                     key: 'title'
                 },
                 {
+                    title: '新闻类型',
+                    key: 'news_type',
+                    render: (h, params) => {
+                        return h('span',
+                            params.row.news_type === 'latest' ? '最新动态'
+                                : params.row.news_type === 'media' ? '媒体报道' : '业内文化');
+                    }
+                },
+                {
                     title: '是否公开',
                     key: 'is_open',
                     render: (h, params) => {

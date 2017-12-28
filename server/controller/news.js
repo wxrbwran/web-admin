@@ -1,10 +1,10 @@
 const { News, knex, Positions } = require('../config/db');
 const moment = require('moment');
 
-const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft',
+const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft', 'news_type',
     'publish_time_type', 'publish_time'];
 
-const FEArticleColumn = ['id', 'title', 'description', 'content', 'is_top', 'publish_time'];
+const FEArticleColumn = ['id', 'title', 'cover', 'description', 'content', 'news_type', 'is_top', 'publish_time'];
 
 module.exports = {
 
@@ -97,7 +97,7 @@ module.exports = {
         const { id } = ctx.params;
         try {
             const news = await knex
-                .first(articleColumn.concat(['content', 'description']))
+                .first(articleColumn.concat(['content', 'cover', 'description']))
                 .where({id, is_delete: false})
                 .from('news');
             return ctx.body = {

@@ -4,7 +4,7 @@
 </style>
 
 <script>
-import { ajaxPost, ajaxPatch } from '@/libs/ajax';
+import { ajaxPost } from '@/libs/ajax';
 import mixin from './mixin/article';
 import template from './mixin/article-template';
 
@@ -18,6 +18,8 @@ export default {
                 title: this.articleTitle,
                 description: this.description,
                 content: this.content,
+                news_type: this.currentNewsType,
+                cover: this.cover,
                 is_open: this.currentOpenness === '公开',
                 is_top: this.topArticle,
                 publish_time_type: this.publishTimeType,
