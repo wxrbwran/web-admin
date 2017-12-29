@@ -72,7 +72,7 @@
                             this.fillPositionList(position);
                             this.currentOpenness = position.is_open ? '公开' : '私密';
                             this.Openness = position.is_open ? '公开' : '私密';
-                            this.publishTime = moment(+position.publish_time, 'x').format('YYYY-MM-DD HH:mm:ss');
+                            this.publishTime = new Date();
                         } else {
                             this.$Message.error({
                                 content: '职位信息不存在!'

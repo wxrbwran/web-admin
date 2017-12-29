@@ -63,7 +63,7 @@
                             this.Openness = news.is_open ? '公开' : '私密';
                             this.topArticle = news.is_top;
                             this.publishTimeType = news.publish_time_type;
-                            this.publishTime = moment(+news.publish_time, 'x').format('YYYY-MM-DD HH:mm:ss');
+                            this.publishTime = moment(news.publish_time).format('YYYY-MM-DD HH:mm:ss');
                         } else {
                             this.$Message.error({
                                 content: '新闻不存在!'
