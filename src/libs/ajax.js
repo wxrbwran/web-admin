@@ -2,10 +2,10 @@ import env from '../../build/env';
 import axios from 'axios/index';
 
 const ajaxUrl = env === 'development'
-    ? 'http://127.0.0.1:3000'
+    ? 'http://172.16.10.8:3000'
     : env === 'production'
-        ? 'http://localhost:8888'
-        : 'http://localhost:8888';
+        ? 'http://172.16.10.8:8888'
+        : 'http://172.16.10.8:8888';
 
 const nameSpace = '/api/v0/';
 

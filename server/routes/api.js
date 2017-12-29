@@ -6,28 +6,29 @@ router.prefix('/api/v0');
 
 /* 新闻 */
 
-router.get('/all_articles', newsController.getAllArticles);
-
 router.get('/post_articles', newsController.getPostArticles);
-
-router.get('/article/:id', newsController.getArticleById);
 
 router.post('/article', newsController.addArticle);
 
 router.patch('/article/:id', newsController.editArticleById);
 
+router.get('/all_articles', newsController.getAllArticles);
+
+router.get('/article/:id', newsController.getArticleById);
+
+
 router.delete('/article/:id', newsController.deleteArticleById);
 
 /* 招聘 */
-router.get('/all_positions', positionController.getAllPositions);
-
 router.get('/post_positions', positionController.getPostPositions);
-
-router.get('/position/:id', positionController.getPositionById);
 
 router.post('/position', positionController.addPosition);
 
 router.patch('/position/:id', positionController.editPositionById);
+
+router.get('/all_positions', positionController.getAllPositions);
+
+router.get('/position/:id', positionController.getPositionById);
 
 router.delete('/position/:id', positionController.deletePositionById);
 

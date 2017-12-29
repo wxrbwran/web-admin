@@ -15,7 +15,7 @@ npm i cnpm -g
 cnpm i pm2 -g
 cnpm i
 ```
-
+pm2
 ## Development
 1. Start monitoring file changes & developing
 ```
