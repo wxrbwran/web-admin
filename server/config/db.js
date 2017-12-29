@@ -2,7 +2,9 @@ const knex = require('knex')({
     client: 'pg',
     searchPath: 'public',
     connection: {
-        host: '127.0.0.1',
+        // host: '127.0.0.1',
+        // host: 'localhost',
+        host: '172.16.10.8',
         user: 'test',
         password: 'qingfei775',
         database: 'web'
@@ -10,18 +12,6 @@ const knex = require('knex')({
     acquireConnectionTimeout: 10000
 });
 
-const bs = require('bookshelf')(knex);
-
-const News = bs.Model.extend({
-    tableName: 'news'
-});
-
-const Positions = bs.Model.extend({
-    tableName: 'position'
-});
-
 module.exports = {
-    News,
-    Positions,
-    knex,
+    knex
 };

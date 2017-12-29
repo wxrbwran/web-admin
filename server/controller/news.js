@@ -1,4 +1,4 @@
-const { News, knex, Positions } = require('../config/db');
+const { knex} = require('../config/db');
 const moment = require('moment');
 
 const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft', 'news_type',
