@@ -1,6 +1,24 @@
 const { knex} = require('../config/db');
 const moment = require('moment');
 
+knex.schema.withSchema('public').createTableIfNotExists('news', function(table) {
+    table.increments();
+    table.text('title').notNull();
+    table.text('description').notNull();
+    table.text('content').notNull();
+    table.string('cover');
+    table.string('news_type').defaultTo('latest');
+    table.boolean('is_open').defaultTo(true);
+    table.boolean('is_top').defaultTo(false);
+    table.boolean('is_draft').defaultTo(false);
+    table.boolean('is_delete').defaultTo(false);
+    table.string('publish_time_type');
+    table.timestamp('publish_time');
+    table.timestamp('created_time');
+}).asCallback(() => {
+    console.log('table news has created!');
+});
+
 const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft', 'news_type',
     'publish_time_type', 'publish_time'];
 
@@ -116,7 +134,7 @@ module.exports = {
 
     addArticle: async (ctx, next) => {
         try {
-            await knex('news').returning('id').insert(ctx.request.body);
+            await knex('news').insert(ctx.request.body);
             return ctx.body = {
                 status: 'success',
                 data: null,

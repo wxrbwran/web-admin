@@ -3,7 +3,6 @@ const knex = require('knex')({
     searchPath: 'public',
     connection: {
         // host: '127.0.0.1',
-        // host: 'localhost',
         host: '172.16.10.8',
         user: 'test',
         password: 'qingfei775',

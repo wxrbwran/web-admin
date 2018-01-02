@@ -4,7 +4,6 @@
 
 <script>
     import { ajaxGet, ajaxPatch } from '@/libs/ajax';
-    import moment from 'moment';
     import template from './mixin/position-template';
     import mixin from './mixin/position';
 

@@ -16,7 +16,6 @@ router.get('/all_articles', newsController.getAllArticles);
 
 router.get('/article/:id', newsController.getArticleById);
 
-
 router.delete('/article/:id', newsController.deleteArticleById);
 
 /* 招聘 */

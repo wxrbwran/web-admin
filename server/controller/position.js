@@ -1,13 +1,31 @@
 const { knex } = require('../config/db');
 const moment = require('moment');
 
+knex.schema.withSchema('public').createTableIfNotExists('position', function(table) {
+    table.increments();
+    table.string('position');
+    table.integer('job_type').defaultTo(1);
+    table.string('experience');
+    table.string('location');
+    table.specificType('temptation', 'text[]');
+    table.specificType('responsibility', 'text[]');
+    table.specificType('skill', 'text[]');
+    table.specificType('professionalism', 'text[]');
+    table.boolean('is_open').defaultTo(true);
+    table.boolean('is_draft').defaultTo(false);
+    table.boolean('is_delete').defaultTo(false);
+    table.timestamp('publish_time');
+    table.timestamp('created_time');
+}).asCallback(() => {
+    console.log('table position has created!');
+});
+
 const positionColumn = ['id', 'position', 'job_type', 'experience', 'location',
-    'temptation', 'responsibility', 'skill', 'professionalism',
-    'is_open', 'is_draft', 'publish_time', 'created_time'];
+    'temptation', 'responsibility', 'skill', 'professionalism', 'is_open',
+    'is_draft', 'publish_time', 'created_time'];
 
 const FEPositionColumn = ['id', 'position', 'job_type', 'experience', 'location',
-    'temptation', 'responsibility', 'skill', 'professionalism',
-    'publish_time'];
+    'temptation', 'responsibility', 'skill', 'professionalism', 'publish_time'];
 
 module.exports = {
 
@@ -111,7 +129,7 @@ module.exports = {
         }
     },
 
-    addPosition: async (ctx, next) => {
+    addPosition:async (ctx, next) => {
         try {
             await knex('position').insert(ctx.request.body);
             return ctx.body = {
