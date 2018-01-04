@@ -7,8 +7,8 @@
     "init": "webpack --progress --config build/webpack.dev.config.js",
     "client-dev": "webpack-dev-server --open --config build/webpack.dev.config.js",
     "client-build": "webpack --progress --hide-modules --config build/webpack.prod.config.js",
-    "server-dev": "PORT=3000 nodemon ./server/bin/www",
-    "server-build": "pm2 start ./server/bin/www",
+    "server-dev": "NODE_ENV=development nodemon ./server/bin/www",
+    "server-build": "NODE_ENV=production pm2 start ./server/bin/www",
     "dev": "concurrently 'npm run server-dev' 'npm run client-dev'",
     "build": "npm run client-build && npm run server-build"
   },

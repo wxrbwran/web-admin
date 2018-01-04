@@ -1,11 +1,10 @@
-import env from '../../build/env';
 import axios from 'axios/index';
 
-const ajaxUrl = env === 'development'
-    ? 'http://172.16.10.8:3000'
-    : env === 'production'
-        ? 'http://172.16.10.8:8888'
-        : 'http://172.16.10.8:8888';
+let ajaxUrl = 'http://172.16.10.8:3000';
+
+if (process.env.NODE_ENV === 'production') {
+    ajaxUrl = 'http://172.16.10.8:8888';
+}
 
 const nameSpace = '/api/v0/';
 

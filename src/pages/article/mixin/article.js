@@ -110,8 +110,9 @@ const mixin = {
             this.content = html;
         },
         canPublish () {
-            if (!this.articleTitle.length || !this.description || !this.content) {
-                this.$Message.error('请完善文章再保存!');
+            if (!this.articleTitle.length || !this.description ||
+                !this.content || !this.cover) {
+                this.$Message.error('请完善文章所需内容再保存!');
                 return false;
             }
             return true;
