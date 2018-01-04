@@ -64,6 +64,7 @@ module.exports = {
 
     getPostArticles: async (ctx) => {
         try {
+            const type = ctx.request.query.type;
             const offset = ctx.request.query.page_size * (ctx.request.query.page_at - 1);
             const total = await knex
                 .column(FEArticleColumn)
@@ -72,6 +73,7 @@ module.exports = {
                 )
                 .andWhere(
                     {
+                        news_type: type,
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
@@ -82,6 +84,7 @@ module.exports = {
                 .where('publish_time', '<',new Date)
                 .andWhere(
                     {
+                        news_type: type,
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
@@ -134,7 +137,7 @@ module.exports = {
 
     addArticle: async (ctx, next) => {
         try {
-            await knex('news').insert(ctx.request.body);
+            await knex('news').returning('id').insert(ctx.request.body);
             return ctx.body = {
                 status: 'success',
                 data: null,
