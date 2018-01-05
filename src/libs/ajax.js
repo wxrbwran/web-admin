@@ -3,7 +3,7 @@ import axios from 'axios/index';
 let ajaxUrl = 'http://172.16.10.8:3000';
 
 if (process.env.NODE_ENV === 'production') {
-    ajaxUrl = 'http://feadmin.xzlcorp.com/api';
+    ajaxUrl = 'http://feadmin.xzlcorp.com:8888';
 }
 
 const nameSpace = '/api/v0/';
