@@ -64,7 +64,7 @@ module.exports = {
 
     getPostArticles: async (ctx) => {
         try {
-            const type = ctx.request.query.type;
+            const type = ctx.request.query.type || 'latest';
             const offset = ctx.request.query.page_size * (ctx.request.query.page_at - 1);
             const total = await knex
                 .column(FEArticleColumn)
@@ -121,10 +121,12 @@ module.exports = {
                 .first(articleColumn.concat(['content', 'cover', 'description']))
                 .where({id, is_delete: false})
                 .from('news');
+            news.publish_time = moment(news.publish_time)
+                .format('YYYY/MM/DD HH:mm');
             return ctx.body = {
                 status: 'success',
                 data: {
-                    news: news,
+                    news,
                 },
             };
         } catch (e) {
