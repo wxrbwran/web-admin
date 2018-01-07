@@ -16,8 +16,6 @@ module.exports = (app) => {
     }));
     app.use(cors({
         origin: function(ctx){
-            console.log("this is cors ctx");
-            console.log(ctx);
             return ctx.get('Origin');
         },
         credentials: true,
