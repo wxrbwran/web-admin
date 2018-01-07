@@ -15,7 +15,7 @@ module.exports = (app) => {
     }));
     app.use(cors({
         origin: function (ctx) {
-            return '*';
+            return 'https://xinzhili.cn';
         },
         credentials: true,
         allowMethods: ['GET', 'POST', 'DELETE', 'PATCH'],
