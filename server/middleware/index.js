@@ -6,7 +6,7 @@ const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const compress = require('koa-compress');
 
-const whitelist = ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
+// const whitelist = ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
 module.exports = (app) => {
     // error handler
     onerror(app);
@@ -15,9 +15,10 @@ module.exports = (app) => {
         enableTypes: ['json', 'form', 'text'],
     }));
     app.use(cors({
-        origin: function(origin, callback){
-            const originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-            callback(null, originIsWhitelisted);
+        origin: function(ctx){
+            console.log("this is cors ctx");
+            console.log(ctx);
+            return ctx.get('Origin');
         },
         credentials: true,
         allowMethods: ['GET', 'POST', 'DELETE', 'PATCH'],
