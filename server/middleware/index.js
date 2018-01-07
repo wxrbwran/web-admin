@@ -14,10 +14,10 @@ module.exports = (app) => {
         enableTypes: ['json', 'form', 'text'],
     }));
     app.use(cors({
-        origin: function (ctx) {
-            return ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
-        },
-        credentials: true,
+        // origin: function (ctx) {
+        //     return ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
+        // },
+        // credentials: true,
         allowMethods: ['GET', 'POST', 'DELETE', 'PATCH'],
         allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
     }));
