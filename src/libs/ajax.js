@@ -13,6 +13,12 @@ const ajax = axios.create({
     timeout: 5000
 });
 
+
+const auth = axios.create({
+    baseURL: ajaxUrl,
+    timeout: 5000
+});
+
 let $vm = null;
 
 ajax.interceptors.response.use(
@@ -49,27 +55,19 @@ ajax.interceptors.response.use(
     },
 );
 
-const req = async (option, vm) => {
+const req = async (option, vm, instance) => {
     $vm = vm;
     try {
         let res = null;
         switch (option.method) {
             case 'get' :
-                res = await ajax.get(option.url, {params: option.params});
+                res = await instance.get(option.url, {params: option.params});
                 break;
-            case 'post' :
-                res = await ajax.post(option.url, option.params);
-                break;
-            case 'patch' :
-                res = await ajax.patch(option.url, option.params);
-                break;
-            case 'delete' :
-                res = await ajax.delete(option.url, option.params);
-                break;
+            default :
+                res = await instance.post(option.url, option.params);
         }
         option.success.call(vm, res);
     } catch (e) {
-        console.log(e);
         if (option.fail) {
             option.fail.call(vm, e);
         } else {
@@ -87,12 +85,19 @@ const req = async (option, vm) => {
 const methods = ['Get', 'Post', 'Patch', 'Delete'];
 
 const ajaxMethods = {};
+const authMethods = {};
+
 methods.forEach(method => {
     ajaxMethods[`ajax${method}`] = (option, vm) => {
         const op = Object.assign(option,
             {method: method.toLowerCase()});
-        req(op, vm);
-    }
+        req(op, vm, ajax);
+    };
+    authMethods[`ajax${method}`] = (option, vm) => {
+        const op = Object.assign(option,
+            {method: method.toLowerCase()});
+        req(op, vm, auth);
+    };
 });
 
 const ajaxGet = ajaxMethods.ajaxGet;
@@ -100,10 +105,14 @@ const ajaxPost = ajaxMethods.ajaxPost;
 const ajaxPatch = ajaxMethods.ajaxPatch;
 const ajaxDelete = ajaxMethods.ajaxDelete;
 
+const authPost = authMethods.ajaxPost;
+
 export {
     ajax,
+    auth,
     ajaxGet,
     ajaxPost,
+    authPost,
     ajaxPatch,
     ajaxDelete,
     ajaxUrl
