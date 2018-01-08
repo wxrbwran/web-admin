@@ -30,11 +30,7 @@ module.exports = {
             if (+result.count > 0) {
                 return ctx.body = {
                     status: 'success',
-                    data: {
-                        username,
-                        password,
-                        cryptoPassword
-                    },
+                    data: {},
                 };
             } else {
                 return ctx.body = {
