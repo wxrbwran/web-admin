@@ -14,7 +14,7 @@ const devConfig = {
 
 const knex = require('knex')({
     client: 'pg',
-    searchPath: 'public',
+    searchPath: 'web_fx',
     connection: process.env.NODE_ENV === 'production' ? proConfig : devConfig,
     acquireConnectionTimeout: 10000
 });

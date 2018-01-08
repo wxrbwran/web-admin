@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const { knex} = require('../config/db');
 
-knex.schema.withSchema('public').createTableIfNotExists('users', function(table) {
+knex.schema.withSchema('web_fx').createTableIfNotExists('users', function(table) {
     table.increments();
     table.text('username').notNull();
     table.text('password').notNull();

@@ -1,7 +1,7 @@
 const { knex } = require('../config/db');
 const moment = require('moment');
 
-knex.schema.withSchema('public').createTableIfNotExists('position', function(table) {
+knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(table) {
     table.increments();
     table.string('position');
     table.integer('job_type').defaultTo(1);

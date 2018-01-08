@@ -1,7 +1,7 @@
 const { knex} = require('../config/db');
 const moment = require('moment');
 
-knex.schema.withSchema('public').createTableIfNotExists('news', function(table) {
+knex.schema.withSchema('web_fx').createTableIfNotExists('news', function(table) {
     table.increments();
     table.text('title').notNull();
     table.text('description').notNull();
