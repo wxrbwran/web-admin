@@ -4,6 +4,7 @@ let ajaxUrl = 'http://172.16.10.8:3000';
 
 if (process.env.NODE_ENV === 'production') {
     ajaxUrl = 'https://feapi.xzlcorp.com';
+    // ajaxUrl = 'https://localhost:8888';
 }
 
 const nameSpace = '/api/v0/';
@@ -61,10 +62,10 @@ const req = async (option, vm, instance) => {
         let res = null;
         switch (option.method) {
             case 'get' :
-                res = await instance.get(option.url, {params: option.params});
+                res = await ajax.get(option.url, {params: option.params});
                 break;
             default :
-                res = await instance.post(option.url, option.params);
+                res = await instance[option.method](option.url, option.params);
         }
         option.success.call(vm, res);
     } catch (e) {
