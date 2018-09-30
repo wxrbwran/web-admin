@@ -1,8 +1,12 @@
 const router = require('koa-router')();
 const newsController = require('../controller/news');
 const positionController = require('../controller/position');
+const jwtKoa = require('koa-jwt');
+const tokenConfig = require('../config/token');
 
 router.prefix('/api/v0');
+
+router.use(jwtKoa({ secret: tokenConfig.secret }));
 
 /* 新闻 */
 

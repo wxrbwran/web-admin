@@ -1,6 +1,9 @@
 const crypto = require('crypto');
 const { knex} = require('../config/db');
+const jsonwebtoken  = require('jsonwebtoken');
+const tokenConfig = require('../config/token');
 
+console.log(tokenConfig);
 knex.schema.withSchema('web_fx').createTableIfNotExists('users', function(table) {
     table.increments();
     table.text('username').notNull();
@@ -28,9 +31,25 @@ module.exports = {
                 })
                 .first();
             if (+result.count > 0) {
+                const tokenData = { username };
+                const token = jsonwebtoken.sign(
+                    tokenData,
+                    tokenConfig.secret,
+                    {
+                        expiresIn: tokenConfig.expired
+                    });
+                const refresh_token = jsonwebtoken.sign(
+                    tokenData,
+                    tokenConfig.secret,
+                    {
+                        expiresIn: tokenConfig.refresh,
+                    });
                 return ctx.body = {
                     status: 'success',
-                    data: {},
+                    data: {
+                        token,
+                        refresh_token
+                    },
                 };
             } else {
                 return ctx.body = {

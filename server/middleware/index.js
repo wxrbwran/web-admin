@@ -5,6 +5,9 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const compress = require('koa-compress');
+const jwtKoa = require('koa-jwt')
+
+const tokenConfig = require('../config/token');
 
 // const whitelist = ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
 module.exports = (app) => {
@@ -14,6 +17,9 @@ module.exports = (app) => {
     app.use(bodyparser({
         enableTypes: ['json', 'form', 'text'],
     }));
+    // app.use(jwtKoa({secret: tokenConfig.secret}).unless({
+    //     path: ['/', '/auth/login'] //数组中的路径不需要通过jwt验证
+    // }));
     app.use(cors({
         origin: function(ctx){
             return ctx.get('Origin');

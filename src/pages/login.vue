@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { authPost } from '../libs/ajax';
+import { authPost, setAjaxHeader } from '../libs/ajax';
 import Cookies from 'js-cookie';
 
 export default {
@@ -59,7 +59,7 @@ export default {
     },
     methods: {
         handleSubmit () {
-            const self  = this;
+            const self = this;
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     authPost({
@@ -73,6 +73,9 @@ export default {
                             if (status === 'success') {
                                 Cookies.set('user', self.form.userName);
                                 Cookies.set('access', 0);
+                                setAjaxHeader(data.token);
+                                localStorage.setItem('token', data.token);
+                                localStorage.setItem('refresh', data.refresh);
                                 this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
                                 this.$router.push({
                                     name: 'home_index'

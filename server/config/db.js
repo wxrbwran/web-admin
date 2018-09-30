@@ -6,7 +6,7 @@ const proConfig = {
 };
 
 const devConfig = {
-    host: '172.16.10.8',
+    host: '127.0.0.1',
     user: 'test',
     password: 'qingfei775',
     database: 'web'
@@ -18,7 +18,9 @@ const knex = require('knex')({
     connection: process.env.NODE_ENV === 'production' ? proConfig : devConfig,
     acquireConnectionTimeout: 10000
 });
+const jwtsecret = 'wxrrua';
 
 module.exports = {
-    knex
+    knex,
+    jwtsecret
 };
