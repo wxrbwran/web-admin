@@ -15,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "post-commit": "deploy.sh"
+      "post-commit": "./deploy.sh"
     }
   },
   "dependencies": {
