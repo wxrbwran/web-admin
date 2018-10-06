@@ -9,3 +9,5 @@ build/env.js
 dist/
 server/public
 .idea/
+._.DS_Store
+.*.js
