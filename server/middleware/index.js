@@ -9,7 +9,6 @@ const jwtKoa = require('koa-jwt')
 
 const tokenConfig = require('../config/token');
 
-// const whitelist = ['https://xinzhili.cn','https://feadmin.xzlcorp.com'];
 module.exports = (app) => {
     // error handler
     onerror(app);
