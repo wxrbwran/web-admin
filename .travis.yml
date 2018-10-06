@@ -15,4 +15,4 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 123.206.90.112\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-- ssh ubuntu@123.206.90.112 'cd ~/sites/coin && git pull && yarn & npm run build'
+- ssh ubuntu@123.206.90.112 'cd ~/sites/web-admin && git pull && yarn & npm run build'
