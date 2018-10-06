@@ -2,7 +2,7 @@
 
 ### 企业新闻、招聘发布后台
 ```
-前端采用vue/vue-router/vuex/sass/iview
+前端采用vue/vue-router/vuex/less/iview
 后端采用koa2/postgresql/knex/
 采用jwt管理用户api请求鉴权。，
 ```
