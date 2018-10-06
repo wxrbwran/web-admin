@@ -33,3 +33,5 @@ npm run dev
 npm run build
 ```
 2. open 'http://localhost:8888'
+
+= = .
