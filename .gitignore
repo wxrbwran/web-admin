@@ -9,4 +9,3 @@ build/env.js
 dist/
 server/public
 .idea/
-id_rsa.enc
