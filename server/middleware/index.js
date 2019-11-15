@@ -5,6 +5,7 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const compress = require('koa-compress');
+<<<<<<< HEAD
 const jwtKoa = require('koa-jwt')
 
 const tokenConfig = require('../config/token');

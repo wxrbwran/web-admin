@@ -59,7 +59,7 @@ export default {
     },
     methods: {
         handleSubmit () {
-            const self = this;
+            const self  = this;
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
                     authPost({

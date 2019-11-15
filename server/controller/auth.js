@@ -1,9 +1,11 @@
 const crypto = require('crypto');
 const { knex} = require('../config/db');
+<<<<<<< HEAD
 const jsonwebtoken  = require('jsonwebtoken');
 const tokenConfig = require('../config/token');
 
-console.log(tokenConfig);
+// console.log(tokenConfig);
+
 knex.schema.withSchema('web_fx').createTableIfNotExists('users', function(table) {
     table.increments();
     table.text('username').notNull();

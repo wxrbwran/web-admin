@@ -4,9 +4,9 @@ const positionController = require('../controller/position');
 const jwtKoa = require('koa-jwt');
 const tokenConfig = require('../config/token');
 
-router.prefix('/api/v0');
-
 router.use(jwtKoa({ secret: tokenConfig.secret }));
+
+router.prefix('/api/v0');
 
 /* 新闻 */
 

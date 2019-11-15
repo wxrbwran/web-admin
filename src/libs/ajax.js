@@ -1,6 +1,7 @@
 import axios from 'axios/index';
 
-let ajaxUrl = 'http://127.0.0.1:3000';
+// let ajaxUrl = 'http://127.0.0.1:3000';
+let ajaxUrl = 'http://172.16.10.8:3000';
 
 if (process.env.NODE_ENV === 'production') {
     ajaxUrl = 'https://feapi.xzlcorp.com';
@@ -110,8 +111,8 @@ const authPost = authMethods.ajaxPost;
 
 function setAjaxHeader (token) {
     ajax.defaults.headers.common.Authorization = `Bearer ${token}`;
-    console.log('ajax', ajax);
-    console.log('ajaxGet', ajaxGet);
+    // console.log('ajax', ajax);
+    // console.log('ajaxGet', ajaxGet);
 }
 
 export {
@@ -123,5 +124,5 @@ export {
     ajaxPatch,
     ajaxDelete,
     ajaxUrl,
-    setAjaxHeader,
+    setAjaxHeader
 };
