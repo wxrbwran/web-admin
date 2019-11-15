@@ -31,6 +31,7 @@ const mixin = {
             publishTimeType: 'immediately',
             editPublishTime: false, // 是否正在编辑发布时间
             publishLoading: false,
+            site: '',
             editorOption: {
                 theme: 'snow',
                 placeholder: '输入文章内容',
@@ -111,7 +112,7 @@ const mixin = {
         },
         canPublish () {
             if (!this.articleTitle.length || !this.description ||
-                !this.content || !this.cover) {
+                !this.content || !this.cover || !this.site) {
                 this.$Message.error('请完善文章所需内容再保存!');
                 return false;
             }

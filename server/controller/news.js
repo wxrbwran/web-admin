@@ -15,6 +15,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('news', function(table) 
     table.string('publish_time_type');
     table.timestamp('publish_time');
     table.timestamp('created_time');
+    table.string('site').notNull().defaultTo('yixin');
 }).asCallback(() => {
     console.log('table news has created!');
 });
@@ -25,7 +26,6 @@ const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft', 'news_typ
 const FEArticleColumn = ['id', 'title', 'cover', 'description', 'content', 'news_type', 'is_top', 'publish_time'];
 
 module.exports = {
-
     getAllArticles: async (ctx) => {
         try {
             const offset = ctx.request.query.page_size * (ctx.request.query.page_at - 1);

@@ -78,7 +78,8 @@ export default `
                 </p>
                 <p class="margin-top-10">
                     <Icon type="ios-calendar-outline"></Icon>&nbsp;&nbsp;
-                    <span v-if="publishTimeType === 'immediately'">立即发布</span><span v-else>定时：{{ publishTime }}</span>
+                    <span v-if="publishTimeType === 'immediately'">立即发布</span>
+                    <span v-else>定时：{{ publishTime }}</span>
                     <Button v-show="!editPublishTime" size="small" @click="handleEditPublishTime" type="text">修改</Button>
                     <transition name="publish-time">
                         <div v-show="editPublishTime" class="publish-time-picker-con">
@@ -91,6 +92,14 @@ export default `
                             </div>
                         </div>
                     </transition>
+                </p>
+                <p class="margin-top-10">
+                    <Icon type="network"></Icon>&nbsp;&nbsp;
+                    <span>发布网站</span>
+                    <RadioGroup v-model="site">
+                        <Radio label="yixin">翼心</Radio>
+                        <Radio label="zexin">泽心</Radio>
+                    </RadioGroup>
                 </p>
                 <Row class="margin-top-20 publish-button-con">
                     <span class="publish-button">

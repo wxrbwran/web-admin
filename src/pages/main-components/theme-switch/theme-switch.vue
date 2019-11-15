@@ -113,7 +113,7 @@ export default {
                 }]);
             }
             let stylePath = '';
-            if (config.env.indexOf('dev') > -1) {
+            if (config.env.includes('dev')) {
                 stylePath = './src/views/main-components/theme-switch/theme/';
             } else {
                 stylePath = 'dist/';
@@ -128,7 +128,7 @@ export default {
     },
     created () {
         let path = '';
-        if (config.env.indexOf('dev') > -1) {
+        if (config.env.includes('dev')) {
             path = './src/views/main-components/theme-switch/theme/';
         } else {
             path = 'dist/';

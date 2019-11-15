@@ -21,13 +21,14 @@
                     content: this.content,
                     news_type: this.currentNewsType,
                     cover: this.cover,
+                    site: this.site,
                     is_open: this.currentOpenness === '公开',
                     is_top: this.topArticle,
                     publish_time_type: this.publishTimeType,
-                    publish_time: !!this.publishTime ?
-                        new Date(this.publishTime) : new Date()
+                    publish_time: !!this.publishTime ? new Date(this.publishTime) : new Date()
                 };
                 data.is_draft = option.is_draft;
+                console.log('handleSaveArticle', data);
                 const { params } = this.$route;
                 const ajaxData = {
                     url: `article/${params.id}`,

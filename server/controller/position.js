@@ -16,6 +16,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
     table.boolean('is_delete').defaultTo(false);
     table.timestamp('publish_time');
     table.timestamp('created_time');
+    table.string('site').notNull().defaultTo('yixin');
 }).asCallback(() => {
     console.log('table position has created!');
 });
@@ -28,7 +29,6 @@ const FEPositionColumn = ['id', 'position', 'job_type', 'experience', 'location'
     'temptation', 'responsibility', 'skill', 'professionalism', 'publish_time'];
 
 module.exports = {
-
     getAllPositions: async (ctx) => {
         try {
             const offset = ctx.request.query.page_size * (ctx.request.query.page_at - 1);

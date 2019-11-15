@@ -1,5 +1,5 @@
 module.exports = {
     secret: 'wxrrua',
-    expired: '1h',
-    refresh: '2h'
+    expired: '4h',
+    refresh: '5h'
 };
