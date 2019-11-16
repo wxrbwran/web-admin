@@ -12,11 +12,6 @@ const path = require('path');
 const package = require('../package.json');
 
 
-fs.open('./build/env.js', 'w', function(err, fd) {
-    const buf = 'export default "production";';
-    fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
-});
-
 module.exports = merge(webpackBaseConfig, {
     output: {
         publicPath: 'https://feadmin.xzlcorp.com/dist/',

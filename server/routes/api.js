@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const newsController = require('../controller/news');
 const positionController = require('../controller/position');
+const infoController = require('../controller/info');
 const jwtKoa = require('koa-jwt');
 const tokenConfig = require('../config/token');
 
@@ -34,5 +35,12 @@ router.get('/all_positions', positionController.getAllPositions);
 router.get('/position/:id', positionController.getPositionById);
 
 router.delete('/position/:id', positionController.deletePositionById);
+
+/* 基本信息 */
+router.get('/info/:site', infoController.getSiteInfoBySite);
+
+router.post('/info/:site', infoController.addInfo);
+
+router.patch('/info/:site', infoController.editInfoBySite);
 
 module.exports = router;

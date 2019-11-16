@@ -80,6 +80,36 @@ export const appRouter = [
             { path: 'publish', title: '发布职位', name: 'position_publish', icon: 'compose', component: resolve => { require(['@/pages/position/position-publish.vue'], resolve); } },
             { path: 'list', title: '职位列表', name: 'position_list', icon: 'ios-list-outline', component: resolve => { require(['@/pages/position/position-list.vue'], resolve); } }
         ]
+    },
+    {
+        path: '/info',
+        icon: 'android-checkbox',
+        name: 'info',
+        title: '信息',
+        component: Main,
+        children: [
+            // {
+            //     path: 'index',
+            //     title: '基本信息',
+            //     name: 'info-index',
+            //     icon: 'compose',
+            //     component: resolve => { require(['@/pages/info/index.vue'], resolve); }
+            // },
+            {
+                path: 'yixin',
+                title: '翼心科技',
+                name: 'info-yixin',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/info/yixin.vue'], resolve); }
+            },
+            {
+                path: 'zexin',
+                title: '泽心基因',
+                name: 'info-泽心',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/info/zexin.vue'], resolve); }
+            }
+        ]
     }
 ];
 

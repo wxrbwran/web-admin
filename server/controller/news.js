@@ -20,7 +20,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('news', function(table) 
     console.log('table news has created!');
 });
 
-const articleColumn = ['id', 'title', 'is_open', 'is_top', 'is_draft', 'news_type',
+const articleColumn = ['id', 'site', 'title', 'is_open', 'is_top', 'is_draft', 'news_type',
     'publish_time_type', 'publish_time'];
 
 const FEArticleColumn = ['id', 'title', 'cover', 'description', 'content', 'news_type', 'is_top', 'publish_time'];

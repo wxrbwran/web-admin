@@ -126,6 +126,14 @@ export default `
                         </div>
                     </transition>
                 </p>
+                <p class="margin-top-10">
+                    <Icon type="network"></Icon>&nbsp;&nbsp;
+                    <span>发布网站</span>
+                    <RadioGroup v-model="site">
+                        <Radio label="yixin">翼心</Radio>
+                        <Radio label="zexin">泽心</Radio>
+                    </RadioGroup>
+                </p>
                 <Row class="margin-top-20 publish-button-con">
                     <span class="publish-button">
                         <Button @click="handleSaveDraft" :loading="publishLoading">保存草稿</Button>

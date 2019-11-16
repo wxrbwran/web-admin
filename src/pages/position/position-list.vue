@@ -15,6 +15,7 @@
 
 <script>
 import { ajaxGet, ajaxDelete } from '@/libs/ajax';
+import { siteList } from '@/libs/consts';
 import momoent from 'moment';
 
 export default {
@@ -24,6 +25,7 @@ export default {
             total: 0,
             current: 1,
             loading: false,
+            siteList,
             columns: [
                 {
                     title: '序号',
@@ -32,6 +34,13 @@ export default {
                         return h('div', [
                             h('strong', params.row.index)
                         ]);
+                    }
+                },
+                {
+                    title: '发布网站',
+                    key: 'site',
+                    render: (h, params) => {
+                        return h('span', siteList[params.row.site]);
                     }
                 },
                 {

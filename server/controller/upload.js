@@ -3,6 +3,8 @@ const os = require('os');
 const fs = require('fs');
 const Busboy = require('busboy');
 
+const serverPath = path.join(__dirname, '../public/static/');
+
 // 写入目录
 const mkdirsSync = dirname => {
   if (fs.existsSync(dirname)) {
@@ -63,10 +65,27 @@ function uploadFile(ctx, options) {
     ctx.req.pipe(_emmiter);
   });
 }
+// const uploadImg = (ctx, next, type) => new Promise(async (reslove, reject) => {
+//   try {
+//       const result = await uploadFile(ctx, {
+//           fileType: type,
+//           path: serverPath,
+//       });
+//       reslove({
+//         status: 'success',
+//         data: result,
+//       });
+//   } catch (e) {
+//       reject({
+//         status: 'fail',
+//         data: e.stack
+//       });
+//   }
+// }),
+   
 
 module.exports = {
-  uploadImg: async (ctx, next) => {
-    const serverPath = path.join(__dirname, '../public/static/');
+  uploadImgCover: async (ctx, next) => {
     try {
         const result = await uploadFile(ctx, {
             fileType: 'cover',
@@ -82,6 +101,39 @@ module.exports = {
             data: e.stack
         };
     }
-
+  },
+  uploadImgLogo: async (ctx, next) => {
+    try {
+        const result = await uploadFile(ctx, {
+            fileType: 'logo',
+            path: serverPath,
+        });
+        ctx.body = {
+            status: 'success',
+            data: result,
+        };
+    } catch (e) {
+        ctx.body = {
+            status: 'fail',
+            data: e.stack
+        };
+    }
+  },
+  uploadImgLoop: async (ctx, next) => {
+    try {
+        const result = await uploadFile(ctx, {
+            fileType: 'loop',
+            path: serverPath,
+        });
+        ctx.body = {
+            status: 'success',
+            data: result,
+        };
+    } catch (e) {
+        ctx.body = {
+            status: 'fail',
+            data: e.stack
+        };
+    }
   },
 };

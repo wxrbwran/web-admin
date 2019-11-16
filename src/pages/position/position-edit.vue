@@ -18,6 +18,7 @@
                     job_type: this.jobType === '全职' ? 1 : 0,
                     experience: this.experience,
                     location: this.location,
+                    site: this.site,
                     temptation: this.handleListValue(this.temptation),
                     responsibility: this.handleListValue(this.responsibility),
                     skill: this.handleListValue(this.skill),
@@ -72,6 +73,7 @@
                             this.currentOpenness = position.is_open ? '公开' : '私密';
                             this.Openness = position.is_open ? '公开' : '私密';
                             this.publishTime = new Date();
+                            this.site = position.site;
                         } else {
                             this.$Message.error({
                                 content: '职位信息不存在!'

@@ -8,11 +8,12 @@ const fs = require('fs');
 const path = require('path');
 const package = require('../package.json');
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
-fs.open('./build/env.js', 'w', function(err, fd) {
-    const buf = 'export default "development";';
-    fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
-});
+// fs.open('./build/env.js', 'w', function(err, fd) {
+//     const buf = 'export default "development";';
+//     fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
+// });
 
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',

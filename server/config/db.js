@@ -6,8 +6,8 @@ const proConfig = {
 };
 
 const devConfig = {
-    // host: '127.0.0.1',
-    host: '172.16.10.8',
+    host: '127.0.0.1',
+    // host: '172.16.10.8',
     user: 'test',
     password: 'qingfei775',
     database: 'web'

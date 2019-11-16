@@ -16,7 +16,8 @@ const mixin = {
             editOpenness: false,
             Openness: '公开',
             currentOpenness: '公开',
-            publishLoading: false
+            publishLoading: false,
+            site: ''
         };
     },
     methods: {
@@ -85,6 +86,10 @@ const mixin = {
         canPublish () {
             if (this.position.length === 0) {
                 this.$Message.error('请输入岗位名称!');
+                return false;
+            }
+            if (!this.site) {
+                this.$Message.error('请选择发布网站!');
                 return false;
             }
             return true;

@@ -1,6 +1,5 @@
 const crypto = require('crypto');
 const { knex} = require('../config/db');
-<<<<<<< HEAD
 const jsonwebtoken  = require('jsonwebtoken');
 const tokenConfig = require('../config/token');
 

@@ -20,6 +20,7 @@ export default {
                 content: this.content,
                 news_type: this.currentNewsType,
                 cover: this.cover,
+                site: this.site,
                 is_open: this.currentOpenness === '公开',
                 is_top: this.topArticle,
                 publish_time_type: this.publishTimeType,

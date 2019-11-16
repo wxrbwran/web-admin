@@ -1,6 +1,5 @@
-import Env from './env';
 
-let config = {
-    env: Env
+const config = {
+    env: process.env.NODE_ENV
 };
 export default config;

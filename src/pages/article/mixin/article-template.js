@@ -20,7 +20,6 @@ export default `
                                 :on-format-error="handleFormatError"
                                 :on-success="handleSuccess"
                                 type="drag"
-                                name="cover"
                                 :action="action"
                                 style="display: inline-block;width:58px;">
                                 <div style="width: 58px;height:58px;line-height: 58px;">

@@ -21,7 +21,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
     console.log('table position has created!');
 });
 
-const positionColumn = ['id', 'position', 'job_type', 'experience', 'location',
+const positionColumn = ['id', 'site', 'position', 'job_type', 'experience', 'location',
     'temptation', 'responsibility', 'skill', 'professionalism', 'is_open',
     'is_draft', 'publish_time', 'created_time'];
 

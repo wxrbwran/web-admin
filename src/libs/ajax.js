@@ -1,18 +1,18 @@
 import axios from 'axios/index';
 
-// let ajaxUrl = 'http://127.0.0.1:3000';
-let ajaxUrl = 'http://172.16.10.8:3000';
-
+let ajaxUrl = 'http://127.0.0.1:3000';
+// let ajaxUrl = 'http://172.16.10.8:3000';
+let nameSpace = '/api/v0/';
 if (process.env.NODE_ENV === 'production') {
     ajaxUrl = 'https://feapi.xzlcorp.com';
-    // ajaxUrl = 'https://localhost:8888';
+    nameSpace = '/api/v0/';
 }
-
-const nameSpace = '/api/v0/';
-
 const ajax = axios.create({
     baseURL: ajaxUrl + nameSpace,
-    timeout: 5000
+    timeout: 5000,
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+    }
 });
 
 
@@ -63,7 +63,7 @@ const req = async (option, vm, instance) => {
         let res = null;
         switch (option.method) {
             case 'get' :
-                res = await ajax.get(option.url, {params: option.params});
+                res = await instance.get(option.url, {params: option.params});
                 break;
             default :
                 res = await instance[option.method](option.url, option.params);
@@ -73,6 +73,7 @@ const req = async (option, vm, instance) => {
         if (option.fail) {
             option.fail.call(vm, e);
         } else {
+            console.log(e);
             vm.$Message.error({
                 content: e,
             });
@@ -110,9 +111,9 @@ const ajaxDelete = ajaxMethods.ajaxDelete;
 const authPost = authMethods.ajaxPost;
 
 function setAjaxHeader (token) {
+    // console.log('setAjaxHeader', token);
     ajax.defaults.headers.common.Authorization = `Bearer ${token}`;
-    // console.log('ajax', ajax);
-    // console.log('ajaxGet', ajaxGet);
+    // console.log('setAjaxHeader', ajax);
 }
 
 export {

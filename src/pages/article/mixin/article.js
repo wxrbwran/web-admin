@@ -54,7 +54,7 @@ const mixin = {
     },
     computed: {
         action () {
-            return `${ajaxUrl}/upload/img/`;
+            return `${ajaxUrl}/upload/img/cover`;
         }
     },
     methods: {
