@@ -75,6 +75,7 @@ module.exports = {
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
+                        site: ctx.request.query.site
                     })
                 .from('position');
             const positions = await knex
@@ -84,6 +85,7 @@ module.exports = {
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
+                        site: ctx.request.query.site
                     })
                 .limit(ctx.request.query.page_size)
                 .offset(offset)

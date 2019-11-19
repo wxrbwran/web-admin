@@ -26,4 +26,7 @@ html,body{
     width: 100%;
     height: 100%;
 }
+.ql-editor{
+    min-height: 350px;
+  }
 </style>

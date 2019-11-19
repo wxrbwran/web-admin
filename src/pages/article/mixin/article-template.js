@@ -34,9 +34,9 @@ export default `
                 </Form>
                 <div class="editor margin-top-10">
                     <quill-editor ref="myTextEditor"
-                                  v-model="content"
-                                  :options="editorOption"
-                                  @change="onEditorChange($event)">>
+                          v-model="content"
+                          :options="editorOption"
+                          @change="onEditorChange($event)">>
                     </quill-editor>
                 </div>
             </Card>

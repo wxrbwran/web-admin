@@ -9,6 +9,11 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('info', function(table) 
     table.string('logo').notNull();
     table.specificType('img', 'text[]');
     table.string('record');
+    table.string('tel');
+    table.string('address');
+    table.string('email');
+    table.text('about');
+    table.text('about_text');
     table.string('site').defaultTo('yixin').notNull();
     table.timestamp('created_time').defaultTo(knex.fn.now());
 }).asCallback(() => {
@@ -16,7 +21,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('info', function(table) 
 });
 
 const infoColumn = ['id', 'name', 'short_name', 'copyright', 'record', 'logo',
-    'img', 'site'];
+    'img', 'tel', 'address', 'email', 'about', 'about_text', 'site'];
 
 
 module.exports = {

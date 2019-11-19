@@ -11,7 +11,7 @@ const ajax = axios.create({
     baseURL: ajaxUrl + nameSpace,
     timeout: 5000,
     headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        // Authorization: `Bearer ${localStorage.getItem('token')}`,
     }
 });
 
@@ -53,7 +53,8 @@ ajax.interceptors.response.use(
                 });
             }
         }
-        return Promise.reject('服务异常');
+        $vm.$store.commit('logout');
+        return Promise.reject('服务异常,请重新登录!');
     },
 );
 
@@ -111,9 +112,9 @@ const ajaxDelete = ajaxMethods.ajaxDelete;
 const authPost = authMethods.ajaxPost;
 
 function setAjaxHeader (token) {
-    // console.log('setAjaxHeader', token);
+    console.log('setAjaxHeader', token);
     ajax.defaults.headers.common.Authorization = `Bearer ${token}`;
-    // console.log('setAjaxHeader', ajax);
+    console.log('setAjaxHeader', ajax.defaults.headers.common.Authorization);
 }
 
 export {

@@ -69,7 +69,7 @@ module.exports = {
             const total = await knex
                 .column(FEArticleColumn)
                 .where(
-                    'publish_time', '<',new Date
+                    'publish_time', '<',new Date,
                 )
                 .andWhere(
                     {
@@ -77,6 +77,7 @@ module.exports = {
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
+                        site: ctx.request.query.site
                     })
                 .from('news');
             const news = await knex
@@ -88,6 +89,7 @@ module.exports = {
                         is_delete: false,
                         is_open: true,
                         is_draft: false,
+                        site: ctx.request.query.site
                     })
                 .limit(ctx.request.query.page_size)
                 .offset(offset)
