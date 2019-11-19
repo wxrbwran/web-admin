@@ -14,7 +14,7 @@ const package = require('../package.json');
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: 'https://feadmin.xzlcorp.com/dist/',
+        publicPath: './',
         // publicPath: './dist/',
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
