@@ -1,8 +1,9 @@
 const proConfig = {
-    host: 'dev.cuauwtxtbfew.rds.cn-north-1.amazonaws.com.cn',
-    user: 'daqiang',
-    password: '(LiHengShaui123)',
-    database: 'postgres'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+    database: 'feadmin'
 };
 
 const devConfig = {
