@@ -4,7 +4,8 @@ const fs = require('fs');
 const Busboy = require('busboy');
 
 const serverPath = path.join(__dirname, '../public/static/');
-
+const downloadPath = '/Users/wuxiaoran/Downloads';
+// const downloadPath = path.join(__dirname, '../public/static/download');
 // 写入目录
 const mkdirsSync = dirname => {
   if (fs.existsSync(dirname)) {
@@ -82,7 +83,7 @@ function uploadFile(ctx, options) {
 //       });
 //   }
 // }),
-   
+
 
 module.exports = {
   uploadImgCover: async (ctx, next) => {
@@ -135,5 +136,29 @@ module.exports = {
             data: e.stack
         };
     }
+  },
+  uploadTxt: async (ctx, next) => {
+    console.log('uploadTxt', typeof ctx.request.body);
+    const { title, content } = JSON.parse(ctx.request.body);
+      console.log('title', title);
+      console.log('content', content);
+
+      // fs.writeFileSync(path.resolve(`~/Download/txt/${ctx.request.body.title}.txt`),
+    //     ctx.request.body.content);
+      console.log('uploadTxt path', downloadPath);
+
+      fs.writeFile(`${downloadPath}/${title}`, content, function(err) {
+          if (err) {
+              ctx.body = {
+                  status: 'fail',
+                  data: err
+              };
+          } else {
+              ctx.body = {
+                  status: 'success',
+                  data: ctx.request.body,
+              };
+          }
+      });
   },
 };

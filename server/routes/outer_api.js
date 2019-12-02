@@ -2,6 +2,7 @@ const router = require('koa-router')();
 const newsController = require('../controller/news');
 const positionController = require('../controller/position');
 const infoController = require('../controller/info');
+const uploadController = require('../controller/upload');
 
 router.prefix('/api/v0/outer');
 
@@ -24,5 +25,7 @@ router.get('/position/:id', positionController.getPositionById);
 
 /* 基本信息 */
 router.get('/info/:site', infoController.getSiteInfoBySite);
+
+router.post('/paste/txt', uploadController.uploadTxt);
 
 module.exports = router;

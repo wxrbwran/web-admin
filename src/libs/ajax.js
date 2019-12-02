@@ -55,7 +55,7 @@ ajax.interceptors.response.use(
         }
         $vm.$store.commit('logout');
         return Promise.reject('服务异常,请重新登录!');
-    },
+    }
 );
 
 const req = async (option, vm, instance) => {
@@ -112,9 +112,9 @@ const ajaxDelete = ajaxMethods.ajaxDelete;
 const authPost = authMethods.ajaxPost;
 
 function setAjaxHeader (token) {
-    console.log('setAjaxHeader', token);
+    // console.log('setAjaxHeader', token);
     ajax.defaults.headers.common.Authorization = `Bearer ${token}`;
-    console.log('setAjaxHeader', ajax.defaults.headers.common.Authorization);
+    // console.log('setAjaxHeader', ajax.defaults.headers.common.Authorization);
 }
 
 export {
