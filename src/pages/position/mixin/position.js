@@ -4,6 +4,7 @@ const mixin = {
             position: '',
             jobType: '全职',
             location: '北京',
+            num: '',
             experience: '无',
             temptationIndex: 1,
             temptation: [], // 职位诱惑
