@@ -1,7 +1,7 @@
 import axios from 'axios/index';
 
-let ajaxUrl = 'http://127.0.0.1:3000';
-// let ajaxUrl = 'http://172.16.10.8:3000';
+// let ajaxUrl = 'http://127.0.0.1:3000';
+let ajaxUrl = 'http://172.16.10.162:3000';
 let nameSpace = '/api/v0/';
 if (process.env.NODE_ENV === 'production') {
     ajaxUrl = 'https://feapi.xinzhili.cn';

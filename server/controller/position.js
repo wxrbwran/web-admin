@@ -6,6 +6,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
     table.string('position');
     table.integer('job_type').defaultTo(1);
     table.string('experience');
+    table.string('num');
     table.string('location');
     table.specificType('temptation', 'text[]');
     table.specificType('responsibility', 'text[]');
@@ -18,14 +19,14 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
     table.timestamp('created_time');
     table.string('site').notNull().defaultTo('yixin');
 }).asCallback(() => {
-    console.log('table position has created!');
+    console.log('table position has created! ');
 });
 
 const positionColumn = ['id', 'site', 'position', 'job_type', 'experience', 'location',
-    'temptation', 'responsibility', 'skill', 'professionalism', 'is_open',
+    'temptation', 'responsibility', 'skill', 'professionalism', 'is_open', 'num',
     'is_draft', 'publish_time', 'created_time'];
 
-const FEPositionColumn = ['id', 'position', 'job_type', 'experience', 'location',
+const FEPositionColumn = ['id', 'position', 'job_type', 'experience', 'location', 'num',
     'temptation', 'responsibility', 'skill', 'professionalism', 'publish_time'];
 
 module.exports = {

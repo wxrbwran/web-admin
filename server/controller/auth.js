@@ -24,6 +24,7 @@ module.exports = {
             const hmac = crypto.createHmac('sha256', SECRET);
             hmac.update(`${password}${SALT}`);
             const cryptoPassword =hmac.digest('hex');
+            console.log('cryptoPassword', cryptoPassword);
             const result = await knex('users')
                 .count('username')
                 .where({
