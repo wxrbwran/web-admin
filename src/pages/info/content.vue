@@ -155,6 +155,7 @@
             img: this.loopList.map(list => list.serveStatic)
           })
           .then(res => {
+            this.mode = 'patch';
             this.$Notice.success({
                 title: '保存成功',
                 desc: '站点信息保存成功'

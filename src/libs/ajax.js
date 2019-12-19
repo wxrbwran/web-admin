@@ -1,7 +1,7 @@
 import axios from 'axios/index';
 
-let ajaxUrl = 'http://127.0.0.1:3000';
-// let ajaxUrl = 'http://172.16.10.8:3000';
+// let ajaxUrl = 'http://127.0.0.1:3000';
+let ajaxUrl = 'http://172.16.10.162:3000';
 let nameSpace = '/api/v0/';
 if (process.env.NODE_ENV === 'production') {
     ajaxUrl = 'https://feapi.xinzhili.cn';
@@ -55,7 +55,7 @@ ajax.interceptors.response.use(
         }
         $vm.$store.commit('logout');
         return Promise.reject('服务异常,请重新登录!');
-    },
+    }
 );
 
 const req = async (option, vm, instance) => {
@@ -112,9 +112,9 @@ const ajaxDelete = ajaxMethods.ajaxDelete;
 const authPost = authMethods.ajaxPost;
 
 function setAjaxHeader (token) {
-    console.log('setAjaxHeader', token);
+    // console.log('setAjaxHeader', token);
     ajax.defaults.headers.common.Authorization = `Bearer ${token}`;
-    console.log('setAjaxHeader', ajax.defaults.headers.common.Authorization);
+    // console.log('setAjaxHeader', ajax.defaults.headers.common.Authorization);
 }
 
 export {

@@ -6,11 +6,19 @@ export default `
                     <FormItem label="职位名称">
                         <Input v-model="position" @on-blur="handlePositionBlur"/>
                     </FormItem>
-                    <FormItem label="职位类型">
-                        <RadioGroup v-model="jobType">
-                            <Radio label="全职">全职</Radio>
-                            <Radio label="兼职">兼职</Radio>
-                        </RadioGroup>
+                    <div style="display: flex">
+                        <FormItem label="职位类型">
+                            <RadioGroup v-model="jobType">
+                                <Radio label="全职">全职</Radio>
+                                <Radio label="兼职">兼职</Radio>
+                            </RadioGroup>
+                        </FormItem>
+                        <FormItem label="招聘人数" style="flex: 1 1 auto;">
+                            <Input v-model="num" placeholder="高级1人，中级2人..." />
+                        </FormItem>
+                    </div>
+                    <FormItem label="所属部门">
+                        <Input v-model="department" />
                     </FormItem>
                     <FormItem label="工作经验">
                         <Select v-model="experience" placeholder="工作经验">

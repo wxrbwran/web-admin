@@ -16,7 +16,6 @@
 <script>
 import { ajaxGet, ajaxDelete } from '@/libs/ajax';
 import { siteList } from '@/libs/consts';
-import momoent from 'moment';
 
 export default {
     name: 'position-list',
@@ -56,6 +55,10 @@ export default {
                     }
                 },
                 {
+                    title: '所属部门',
+                    key: 'department'
+                },
+                {
                     title: '工作经验',
                     key: 'experience'
                 },
@@ -64,11 +67,14 @@ export default {
                     key: 'location'
                 },
                 {
+                    title: '人数',
+                    key: 'num'
+                },
+                {
                     title: '是否公开',
                     key: 'is_open',
                     render: (h, params) => {
-                        return h('span',
-                            !!params.row.is_open ? '公开' : '私密');
+                        return h('span', params.row.is_open ? '公开' : '私密');
                     }
                 },
                 {

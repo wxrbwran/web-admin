@@ -2,6 +2,8 @@ const router = require('koa-router')();
 const newsController = require('../controller/news');
 const positionController = require('../controller/position');
 const infoController = require('../controller/info');
+const slowController = require('../controller/slow');
+
 const jwtKoa = require('koa-jwt');
 const tokenConfig = require('../config/token');
 
@@ -42,5 +44,15 @@ router.get('/info/:site', infoController.getSiteInfoBySite);
 router.post('/info/:site', infoController.addInfo);
 
 router.patch('/info/:site', infoController.editInfoBySite);
+
+/* 慢病信息 */
+
+router.get('/slow/all', slowController.getAllSlowInfo);
+
+router.get('/slow/:type', slowController.getSlowInfoByType);
+
+router.post('/slow/:type', slowController.addInfo);
+
+router.patch('/slow/:type', slowController.editInfoByType);
 
 module.exports = router;

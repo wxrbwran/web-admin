@@ -110,6 +110,50 @@ export const appRouter = [
                 component: resolve => { require(['@/pages/info/zexin.vue'], resolve); }
             }
         ]
+    },
+    {
+        path: '/slow',
+        icon: 'android-checkbox',
+        name: 'slow',
+        title: '慢病',
+        component: Main,
+        children: [
+            {
+                path: 'bg-data',
+                title: '背景数据',
+                name: 'bg-data',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/slow-disease/bg-data.vue'], resolve); }
+            },
+            {
+                path: 'intro',
+                title: '慢病介绍',
+                name: 'intro',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/slow-disease/intro.vue'], resolve); }
+            },
+            {
+                path: 'major',
+                title: '重大慢病',
+                name: 'major',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/slow-disease/major.vue'], resolve); }
+            },
+            {
+                path: 'harm',
+                title: '慢病危害',
+                name: 'harm',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/slow-disease/harm.vue'], resolve); }
+            },
+            {
+                path: 'management',
+                title: '管理与预防',
+                name: 'management',
+                icon: 'compose',
+                component: resolve => { require(['@/pages/slow-disease/management.vue'], resolve); }
+            }
+        ]
     }
 ];
 

@@ -19,6 +19,8 @@
                     experience: this.experience,
                     location: this.location,
                     site: this.site,
+                    num: this.num,
+                    department: this.department,
                     temptation: this.handleListValue(this.temptation),
                     responsibility: this.handleListValue(this.responsibility),
                     skill: this.handleListValue(this.skill),
@@ -69,6 +71,8 @@
                             this.jobType = position.job_type === 1 ? '全职' : '兼职';
                             this.experience = position.experience;
                             this.location = position.location;
+                            this.num = position.num;
+                            this.department = position.department,
                             this.fillPositionList(position);
                             this.currentOpenness = position.is_open ? '公开' : '私密';
                             this.Openness = position.is_open ? '公开' : '私密';

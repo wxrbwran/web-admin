@@ -8,9 +8,9 @@ const proConfig = {
 
 const devConfig = {
     host: '127.0.0.1',
-    // host: '172.16.10.8',
-    user: 'test',
-    password: 'qingfei775',
+    // host: 'http://172.16.10.162',
+    user: 'wuxiaoran',
+    password: 'test',
     database: 'web'
 };
 
