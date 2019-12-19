@@ -5,6 +5,7 @@ const mixin = {
             jobType: '全职',
             location: '北京',
             num: '',
+            department: '',
             experience: '无',
             temptationIndex: 1,
             temptation: [], // 职位诱惑
@@ -87,6 +88,10 @@ const mixin = {
         canPublish () {
             if (this.position.length === 0) {
                 this.$Message.error('请输入岗位名称!');
+                return false;
+            }
+            if (!this.department) {
+                this.$Message.error('请选择所属部门!');
                 return false;
             }
             if (!this.site) {

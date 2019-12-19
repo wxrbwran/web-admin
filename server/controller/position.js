@@ -1,5 +1,6 @@
 const { knex } = require('../config/db');
 const moment = require('moment');
+const _ = require('lodash');
 
 knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(table) {
     table.increments();
@@ -7,6 +8,7 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
     table.integer('job_type').defaultTo(1);
     table.string('experience');
     table.string('num');
+    table.string('department');
     table.string('location');
     table.specificType('temptation', 'text[]');
     table.specificType('responsibility', 'text[]');
@@ -23,11 +25,11 @@ knex.schema.withSchema('web_fx').createTableIfNotExists('position', function(tab
 });
 
 const positionColumn = ['id', 'site', 'position', 'job_type', 'experience', 'location',
-    'temptation', 'responsibility', 'skill', 'professionalism', 'is_open', 'num',
+    'temptation', 'responsibility', 'skill', 'professionalism', 'is_open', 'num', 'department',
     'is_draft', 'publish_time', 'created_time'];
 
 const FEPositionColumn = ['id', 'position', 'job_type', 'experience', 'location', 'num',
-    'temptation', 'responsibility', 'skill', 'professionalism', 'publish_time'];
+    'temptation', 'responsibility', 'skill', 'professionalism', 'publish_time', 'department'];
 
 module.exports = {
     getAllPositions: async (ctx) => {
@@ -44,17 +46,18 @@ module.exports = {
                 .offset(offset)
                 .orderBy('created_time', 'desc')
                 .from('position');
+            const timeFormatPosition = positions.map((item, idx) => {
+                item.index = offset + idx + 1;
+                item.created_time = moment(item.created_time)
+                    .format('YYYY/MM/DD HH:mm');
+                item.publish_time = moment(item.publish_time)
+                    .format('YYYY/MM/DD HH:mm');
+                return item;
+            });
             return ctx.body = {
                 status: 'success',
                 data: {
-                    positions: positions.map((item, idx) => {
-                        item.index = offset + idx + 1;
-                        item.created_time = moment(item.created_time)
-                            .format('YYYY/MM/DD HH:mm');
-                        item.publish_time = moment(item.publish_time)
-                            .format('YYYY/MM/DD HH:mm');
-                        return item;
-                    }),
+                    positions: timeFormatPosition,
                     total: total.length,
                 },
             };
@@ -92,14 +95,20 @@ module.exports = {
                 .offset(offset)
                 .orderBy('publish_time', 'desc')
                 .from('position');
+            const timeFormatPosition = _.groupBy(positions.map(item => {
+                item.publish_time = moment(item.created_time)
+                    .format('YYYY/MM/DD');
+                return item;
+            }), 'department');
+            const departmentGrouped = Object.keys(timeFormatPosition).map(item => ({
+                department: item,
+                position: timeFormatPosition[item],
+            }));
+            console.log('departmentGrouped', departmentGrouped);
             return ctx.body = {
                 status: 'success',
                 data: {
-                    positions: positions.map(item => {
-                        item.publish_time = moment(item.created_time)
-                            .format('YYYY/MM/DD');
-                        return item;
-                    }),
+                    positions: departmentGrouped,
                     total: total.length,
                 },
             };

@@ -43,7 +43,7 @@
           action: String,
           type: String,
           multiple: Boolean,
-          cbList: Array,
+          cbList: Array
         },
         data () {
             return {

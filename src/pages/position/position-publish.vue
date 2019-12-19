@@ -24,6 +24,7 @@ export default {
                 location: this.location,
                 site: this.site,
                 num: this.num,
+                department: this.department,
                 temptation: this.handleListValue(this.temptation),
                 responsibility: this.handleListValue(this.responsibility),
                 skill: this.handleListValue(this.skill),

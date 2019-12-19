@@ -55,6 +55,10 @@ export default {
                     }
                 },
                 {
+                    title: '所属部门',
+                    key: 'department'
+                },
+                {
                     title: '工作经验',
                     key: 'experience'
                 },

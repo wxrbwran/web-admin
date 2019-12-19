@@ -17,6 +17,9 @@ export default `
                             <Input v-model="num" placeholder="高级1人，中级2人..." />
                         </FormItem>
                     </div>
+                    <FormItem label="所属部门">
+                        <Input v-model="department" />
+                    </FormItem>
                     <FormItem label="工作经验">
                         <Select v-model="experience" placeholder="工作经验">
                             <Option value="无">无</Option>
