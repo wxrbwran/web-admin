@@ -5,6 +5,8 @@ const Busboy = require('busboy');
 
 const serverPath = path.join(__dirname, '../public/static/');
 const downloadPath = '/Users/wuxiaoran/Downloads';
+const magPath = '/Users/wuxiaoran/Downloads';
+
 // const downloadPath = path.join(__dirname, '../public/static/download');
 // 写入目录
 const mkdirsSync = dirname => {
@@ -160,5 +162,31 @@ module.exports = {
               };
           }
       });
+  },
+  magLink: async (ctx, next) => {
+    console.log('uploadTxt', typeof ctx.request.body, ctx.request.body);
+    const { mag } = JSON.parse(ctx.request.body);
+    console.log('mag', mag);
+    if (mag) {
+      fs.writeFile(`${magPath}/mag.txt`, `${mag}\n`, { 'flag': 'a' }, function (err) {
+        console.log('err', err);
+        if (err) {
+          ctx.body = {
+            status: 'fail',
+            data: err
+          };
+        } else {
+          console.log('success');
+          ctx.body = {
+            status: 'success',
+            data: ctx.request.body,
+          };
+        }
+      });
+    }
+    // fs.writeFileSync(path.resolve(`~/Download/txt/${ctx.request.body.title}.txt`),
+    //     ctx.request.body.content);
+    ctx.response.status = 500;
+    ctx.response.body = 'Mag Not Found';
   },
 };

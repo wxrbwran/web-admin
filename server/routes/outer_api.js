@@ -2,6 +2,7 @@ const router = require('koa-router')();
 const newsController = require('../controller/news');
 const positionController = require('../controller/position');
 const infoController = require('../controller/info');
+// const shopController = require("../controller/flutter_shop");
 const slowController = require('../controller/slow');
 
 const uploadController = require('../controller/upload');
@@ -29,11 +30,11 @@ router.get('/position/:id', positionController.getPositionById);
 router.get('/info/:site', infoController.getSiteInfoBySite);
 
 router.post('/paste/txt', uploadController.uploadTxt);
-
+router.post('/paste/mag', uploadController.magLink);
 /* 慢病信息 */
 
 router.get('/slow/all', slowController.getAllSlowInfo);
-
 router.get('/slow/:type', slowController.getSlowInfoByType);
 
+// flutter_shop
 module.exports = router;
